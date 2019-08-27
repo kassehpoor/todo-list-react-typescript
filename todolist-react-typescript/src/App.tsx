@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import TodoPageComponent from './components/todopage-component';
-import HeaderComponent from './components/header-component';
+
+
+import TodolistComponent from './components/todolist-component';
 
 
 import logo from './logo.svg';
@@ -10,10 +11,10 @@ import './App.css';
 const App: React.FC = () => {
   return (
     <div>
-      <HeaderComponent />
+      {/* <HeaderComponent /> */}
       <Router>
         <div>
-          <Route exact path="/" component={TodoPageComponent} />
+          <Route exact path="/" component={TodolistComponent} />
         </div>
       </Router>
     </div>

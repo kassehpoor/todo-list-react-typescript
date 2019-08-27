@@ -1,32 +1,54 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 
+var _todoItems: any[] = [];
+_todoItems.push({ id: 1, title: "learn react", done: false });
+_todoItems.push({ id: 2, title: "learn typescript", done: true });
+_todoItems.push({ id: 3, title: "go to RPA project", done: true });
 
-
-var todoItems = [];
-todoItems.push({ id: 1, title: "learn react", done: false });
-todoItems.push({ id: 2, title: "learn typescript", done: true });
-todoItems.push({ id: 3, title: "go to RPA project", done: true });
-
-class TodoList extends React.Component {
-    render() {
-        var items = this.props.items.map((item, id) => {
-            return (
-                <TodoListItem key={id} item={item} id={id} removeItem={this.props.removeItem} markTodoDone={this.props.markTodoDone} />
-            );
-        });
-        return (
-            <ul className="list-group"> {items} </ul>
-        );
-    }
-}
-
-class TodoListItem extends React.Component {
-    constructor(props) {
+class TodolistComponent extends React.Component {
+    constructor(props: any) {
         super(props);
         this.onClickClose = this.onClickClose.bind(this);
         this.onClickDone = this.onClickDone.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.addItem = this.addItem.bind(this);
+        this.removeItem = this.removeItem.bind(this);
+        this.markTodoDone = this.markTodoDone.bind(this);
+        this.state = { todoItems: _todoItems };
+
+    }
+
+    addItem(todoItem: any) {
+        _todoItems.unshift({
+            id: _todoItems.length + 1,
+            title: todoItem.newItemValue,
+            done: false
+        });
+        this.setState({ todoItems: _todoItems });
+    }
+    removeItem(itemId: any) {
+        _todoItems.splice(itemId, 1);
+        this.setState({ todoItems: _todoItems });
+    }
+    markTodoDone(itemId: any) {
+        var todo = _todoItems[itemId];
+        _todoItems.splice(itemId, 1);
+        todo.done = !todo.done;
+        todo.done ? _todoItems.push(todo) : _todoItems.unshift(todo);
+        this.setState({ todoItems: _todoItems });
+    }
+    componentDidMount() {
+        this.refs.itemName.focus();
+    }
+    onSubmit(event: any) {
+        event.preventDefault();
+        var newItemValue = this.refs.itemName.value;
+
+        if (newItemValue) {
+            this.addItem({ newItemValue });
+            this.refs.form.reset();
+        }
     }
     onClickClose() {
         var id = parseInt(this.props.id);
@@ -40,77 +62,86 @@ class TodoListItem extends React.Component {
         var todoClass = this.props.item.done ?
             "done" : "undone";
         return (
-            <li className="list-group-item ">
-                <div className={todoClass}>
-                    <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span>
-                    {this.props.item.title}
-                    <button type="button" className="close" onClick={this.onClickClose}>&times;</button>
-                </div>
-            </li>
+            <div>
+                return <h1>Todo list</h1>;
+                <form ref="form" onSubmit={this.onSubmit} className="form-inline">
+                    <input type="text" ref="itemName" className="form-control" placeholder="add a new todo..." />
+                    <button type="submit" className="btn btn-default">Add</button>
+                </form>
+                <br />
+                <ul className="list-group">
+
+
+
+                    {_todoItems.map((item, id) =>
+
+                        (<li key={id} item={item} id={id} removeItem={this.props.removeItem} markTodoDone={this.props.markTodoDone} /> </li>)
+        } )
+
+                     <li className="list-group-item ">
+                        <div className={todoClass}>
+                            <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span>
+                            {this.props.item.title}
+
+                            <button type="button" className="close" onClick={this.onClickClose}>&times;</button>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+        );
+    }
+
+}
+
+export default TodolistComponent;
+
+/*
+
+class TodoList extends React.Component {
+    render() {
+
+        return (
+
+        );
+    }
+}
+
+class TodoListItem extends React.Component {
+
+    render() {
+
+        return (
+
         );
     }
 }
 
 class TodoForm extends React.Component {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
-        this.onSubmit = this.onSubmit.bind(this);
     }
-    componentDidMount() {
-        this.refs.itemName.focus();
-    }
-    onSubmit(event) {
-        event.preventDefault();
-        var newItemValue = this.refs.itemName.value;
 
-        if (newItemValue) {
-            this.props.addItem({ newItemValue });
-            this.refs.form.reset();
-        }
-    }
     render() {
         return (
-            <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-                <input type="text" ref="itemName" className="form-control" placeholder="add a new todo..." />
-                <button type="submit" className="btn btn-default">Add</button>
-            </form>
+
         );
     }
 }
 
 class TodoHeader extends React.Component {
     render() {
-        return <h1>Todo list</h1>;
+
     }
 }
 
 class TodoApp extends React.Component {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
-        this.addItem = this.addItem.bind(this);
-        this.removeItem = this.removeItem.bind(this);
-        this.markTodoDone = this.markTodoDone.bind(this);
-        this.state = { todoItems: todoItems };
+
     }
-    addItem(todoItem) {
-        todoItems.unshift({
-            id: todoItems.length + 1,
-            title: todoItem.newItemValue,
-            done: false
-        });
-        this.setState({ todoItems: todoItems });
-    }
-    removeItem(itemId) {
-        todoItems.splice(itemId, 1);
-        this.setState({ todoItems: todoItems });
-    }
-    markTodoDone(itemId) {
-        var todo = todoItems[itemId];
-        todoItems.splice(itemId, 1);
-        todo.done = !todo.done;
-        todo.done ? todoItems.push(todo) : todoItems.unshift(todo);
-        this.setState({ todoItems: todoItems });
-    }
+
     render() {
         return (
             <div id="main">
@@ -123,9 +154,17 @@ class TodoApp extends React.Component {
     }
 }
 
-export default TodoApp;
+// export default TodoApp;
 
-ReactDOM.render(<TodoApp initItems={todoItems} />, document.getElementById('root'));
+ReactDOM.render(<TodoApp initItems={_todoItems} />, document.getElementById('root'));
+*/
+
+
+
+
+
+
+
 
 /*
 Todo app structure
@@ -156,10 +195,10 @@ import './index.css';
 
 
 
-var todoItems = [];
-todoItems.push({ id: 1, title: "learn react", done: false });
-todoItems.push({ id: 2, title: "Go shopping", done: true });
-todoItems.push({ id: 3, title: "buy flowers", done: true });
+var _todoItems: any[] = [];
+_todoItems.push({ id: 1, title: "learn react", done: false });
+_todoItems.push({ id: 2, title: "learn typescript", done: true });
+_todoItems.push({ id: 3, title: "go to RPA project", done: true });
 
 class TodoList extends React.Component {
     render() {
@@ -175,7 +214,7 @@ class TodoList extends React.Component {
 }
 
 class TodoListItem extends React.Component {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.onClickClose = this.onClickClose.bind(this);
         this.onClickDone = this.onClickDone.bind(this);
@@ -204,14 +243,14 @@ class TodoListItem extends React.Component {
 }
 
 class TodoForm extends React.Component {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
     }
     componentDidMount() {
         this.refs.itemName.focus();
     }
-    onSubmit(event) {
+    onSubmit(event: any) {
         event.preventDefault();
         var newItemValue = this.refs.itemName.value;
 
@@ -237,38 +276,39 @@ class TodoHeader extends React.Component {
 }
 
 class TodoApp extends React.Component {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.addItem = this.addItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.markTodoDone = this.markTodoDone.bind(this);
-        this.state = { todoItems: todoItems };
+        this.state = { todoItems: _todoItems };
     }
-    addItem(todoItem) {
-        todoItems.unshift({
-            id: todoItems.length + 1,
+    addItem(todoItem: any) {
+        _todoItems.unshift({
+            id: _todoItems.length + 1,
             title: todoItem.newItemValue,
             done: false
         });
-        this.setState({ todoItems: todoItems });
+        this.setState({ todoItems: _todoItems });
     }
-    removeItem(itemId) {
-        todoItems.splice(itemId, 1);
-        this.setState({ todoItems: todoItems });
+    removeItem(itemId: any) {
+        _todoItems.splice(itemId, 1);
+        this.setState({ todoItems: _todoItems });
     }
-    markTodoDone(itemId) {
-        var todo = todoItems[itemId];
-        todoItems.splice(itemId, 1);
+    markTodoDone(itemId: any) {
+        var todo = _todoItems[itemId];
+        _todoItems.splice(itemId, 1);
         todo.done = !todo.done;
-        todo.done ? todoItems.push(todo) : todoItems.unshift(todo);
-        this.setState({ todoItems: todoItems });
+        todo.done ? _todoItems.push(todo) : _todoItems.unshift(todo);
+        this.setState({ todoItems: _todoItems });
     }
     render() {
         return (
             <div id="main">
                 <TodoHeader />
-                <TodoList items={this.props.initItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
                 <TodoForm addItem={this.addItem} />
+                <br />
+                <TodoList items={this.props.initItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
             </div>
         );
     }
@@ -276,8 +316,7 @@ class TodoApp extends React.Component {
 
 export default TodoApp;
 
-ReactDOM.render(<TodoApp initItems={todoItems} />, document.getElementById('root'));
-
+ReactDOM.render(<TodoApp initItems={_todoItems} />, document.getElementById('root'));
 */
 
 //-----------------------------------------------------------------------------------------------------------------------
