@@ -115,8 +115,9 @@ class TodoApp extends React.Component {
         return (
             <div id="main">
                 <TodoHeader />
-                <TodoList items={this.props.initItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
                 <TodoForm addItem={this.addItem} />
+                <br />
+                <TodoList items={this.props.initItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
             </div>
         );
     }
@@ -125,6 +126,19 @@ class TodoApp extends React.Component {
 export default TodoApp;
 
 ReactDOM.render(<TodoApp initItems={todoItems} />, document.getElementById('root'));
+
+/*
+Todo app structure
+
+TodoApp
+	- TodoHeader
+	- TodoList
+    - TodoListItem #1
+		- TodoListItem #2
+		  ...
+		- TodoListItem #N
+	- TodoForm
+*/
 
 
 
