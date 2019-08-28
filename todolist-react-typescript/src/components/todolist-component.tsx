@@ -19,34 +19,8 @@ export default class TodolistComponent extends React.Component {
         this.state = { todoItems: _todoItems };
         this.onSubmit = this.onSubmit.bind(this);
     }
-
-    addItem(todoItem: any) {
-        _todoItems.unshift({
-            id: _todoItems.length + 1,
-            title: todoItem.newItemValue,
-            done: false
-        });
-        this.setState({ todoItems: _todoItems });
-    }
-    removeItem(itemId: any) {
-        _todoItems.splice(itemId, 1);
-        this.setState({ todoItems: _todoItems });
-    }
-    markTodoDone(itemId: any) {
-        var todo = _todoItems[itemId];
-        _todoItems.splice(itemId, 1);
-        todo.done = !todo.done;
-        todo.done ? _todoItems.push(todo) : _todoItems.unshift(todo);
-        this.setState({ todoItems: _todoItems });
-    }
     componentDidMount() {
         // this.refs.itemName.focus();
-    }
-
-    onSubmit(event: any) {
-        event.preventDefault()
-        // this.setState({ todoItems: this.state });
-        this.addItem(this.refs);
     }
 
     onClickClose(itemId: any) {
@@ -57,6 +31,34 @@ export default class TodolistComponent extends React.Component {
     onClickDone(itemId: any) {
         var id = parseInt(_todoItems[itemId]);
         this.markTodoDone(id);
+    }
+
+    markTodoDone(itemId: any) {
+        var todo = _todoItems[itemId];
+        _todoItems.splice(itemId, 1);
+        todo.done = !todo.done;
+        todo.done ? _todoItems.push(todo) : _todoItems.unshift(todo);
+        this.setState({ todoItems: _todoItems });
+    }
+
+    removeItem(itemId: any) {
+        _todoItems.splice(itemId, 1);
+        this.setState({ todoItems: _todoItems });
+    }
+
+    addItem(todoItem: any) {
+        _todoItems.unshift({
+            id: _todoItems.length + 1,
+            title: todoItem.newItemValue,
+            done: false
+        });
+        this.setState({ todoItems: _todoItems });
+    }
+
+    onSubmit(event: any) {
+        event.preventDefault()
+        // this.setState({ todoItems: this.state });
+        this.addItem(this.refs);
     }
 
     render() {
