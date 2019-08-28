@@ -1,22 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
-import TodolistComponent from './components/todolist-component';
+// import TodolistComponent from './components/todolist-component';
 
 
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 const App: React.FC = () => {
   return (
     <div>
       {/* <HeaderComponent /> */}
-      <Router>
+      {/* <Router>
         <div>
           <Route exact path="/" component={TodolistComponent} />
         </div>
-      </Router>
+      </Router> */}
     </div>
   );
 }

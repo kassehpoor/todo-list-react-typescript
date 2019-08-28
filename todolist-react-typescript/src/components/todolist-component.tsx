@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './index.css';
+import '../index.css';
 
 
 var _todoItems: any[] = [];
@@ -8,16 +8,20 @@ _todoItems.push({ id: 2, title: "learn typescript", done: true });
 _todoItems.push({ id: 3, title: "go to RPA project", done: true });
 
 export default class TodolistComponent extends React.Component {
+
+    inputValue: string;
+
     constructor(props: any) {
         super(props);
-        this.onClickClose = this.onClickClose.bind(this);
-        this.onClickDone = this.onClickDone.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.addItem = this.addItem.bind(this);
-        this.removeItem = this.removeItem.bind(this);
-        this.markTodoDone = this.markTodoDone.bind(this);
+        // this.onClickClose = this.onClickClose.bind(this);
+        // this.onClickDone = this.onClickDone.bind(this);
+        // this.onSubmit = this.onSubmit.bind(this);
+        // this.addItem = this.addItem.bind(this);
+        // this.removeItem = this.removeItem.bind(this);
+        // this.markTodoDone = this.markTodoDone.bind(this);
         this.state = { todoItems: _todoItems };
-        this.onSubmit = this.onSubmit.bind(this);
+        // this.onSubmit = this.onSubmit.bind(this);
+        this.inputValue = '';
     }
     componentDidMount() {
         // this.refs.itemName.focus();
@@ -46,18 +50,15 @@ export default class TodolistComponent extends React.Component {
         this.setState({ todoItems: _todoItems });
     }
 
-    addItem(todoItem: any) {
+    onSubmit = (e: any) => {
+        e.preventDefault();
+        let title = this.inputValue;
         _todoItems.unshift({
             id: _todoItems.length + 1,
-            title: todoItem.newItemValue,
+            title: title,
             done: false
         });
         this.setState({ todoItems: _todoItems });
-    }
-
-    onSubmit = (e: any) => {
-        e.preventDefault()
-        this.addItem(e.target.value);
     }
 
     createOnClickDone(itemId: any) {
@@ -73,7 +74,7 @@ export default class TodolistComponent extends React.Component {
         const todoList = _todoItems.map(todo => (
             <li key={todo.id}>
                 <div>
-                    <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.createOnClickDone(todo.id)}></span>
+                    <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.createOnClickDone.bind(this, todo.id)}></span>
                     <div className={todo.done ? "done" : "undone"}>{todo.title}</div>
                     <button type="button" className="close" onClick={() => this.onClickClose(todo.id)}>&times;</button>
                 </div>
@@ -82,9 +83,9 @@ export default class TodolistComponent extends React.Component {
 
         return (
             <div>
-                return <h1>Todo list</h1>;
+                <h1>Todo list</h1>;
                 <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-                    <input type="text" ref="newItemValue" className="form-control" placeholder="add a new todo..." />
+                    <input type="text" ref={(val) => this.inputValue = val} name="inputValue" className="form-control" placeholder="add a new todo..." />
                     <button type="submit" className="btn btn-default">Add</button>
                 </form>
                 <br />
