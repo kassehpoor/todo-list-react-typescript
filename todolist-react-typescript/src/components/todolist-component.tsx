@@ -17,6 +17,7 @@ export default class TodolistComponent extends React.Component {
         this.removeItem = this.removeItem.bind(this);
         this.markTodoDone = this.markTodoDone.bind(this);
         this.state = { todoItems: _todoItems };
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     addItem(todoItem: any) {
@@ -39,17 +40,13 @@ export default class TodolistComponent extends React.Component {
         this.setState({ todoItems: _todoItems });
     }
     componentDidMount() {
-        this.refs.itemName.focus();
+        // this.refs.itemName.focus();
     }
 
     onSubmit(event: any) {
-        event.preventDefault();
-        var newItemValue = this.refs.itemName.value;
-
-        if (newItemValue) {
-            this.addItem({ newItemValue });
-            this.refs.form.reset();
-        }
+        event.preventDefault()
+        // this.setState({ todoItems: this.state });
+        this.addItem(this.refs);
     }
 
     onClickClose(itemId: any) {
@@ -78,7 +75,7 @@ export default class TodolistComponent extends React.Component {
             <div>
                 return <h1>Todo list</h1>;
                 <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-                    <input type="text" ref="itemName" className="form-control" placeholder="add a new todo..." />
+                    <input type="text" ref="newItemValue" className="form-control" placeholder="add a new todo..." />
                     <button type="submit" className="btn btn-default">Add</button>
                 </form>
                 <br />
@@ -93,3 +90,10 @@ export default class TodolistComponent extends React.Component {
 
 
 
+// return (
+//     <ul>
+//         {this.state.todoItems.map(function (todo) {
+//             return <li>{todo.title}</li>;
+//         })}
+//     </ul>
+// )
