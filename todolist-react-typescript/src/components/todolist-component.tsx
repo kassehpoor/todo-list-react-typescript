@@ -88,7 +88,7 @@ export default class TodolistComponent extends React.Component {
             </div>
         );
     }
-
+}
 
 
 
