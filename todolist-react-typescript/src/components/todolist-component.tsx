@@ -42,7 +42,6 @@ export default class TodolistComponent extends React.Component {
         this.setState({ todoItems: _todoItems });
     }
 
-
     render() {
 
         const todoList = _todoItems.map(todo => (

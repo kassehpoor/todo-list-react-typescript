@@ -1,11 +1,12 @@
 html, body {
   height: 100%;
   color: #61DAFB;
-  background: rgb(170, 161, 161);
+  background: rgb(243, 241, 241);
 }
 
 h1 {
-  margin: 20px 0 15px 0;  
+  margin: 20px 0 15px 0; 
+  text-align: center; 
 }
 
 #main {
@@ -50,6 +51,12 @@ span.checkmark:before {
 
 .icon {
   margin: 6px 10px 6px 0;
+}
+
+.close{
+  border: transparent;
+  color:red;
+  margin: 4,4,4,4;
 }
 
 
