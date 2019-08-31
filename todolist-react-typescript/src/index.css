@@ -1,7 +1,7 @@
 html, body {
   height: 100%;
   color: #61DAFB;
-  background: #2D2D2D;
+  background: rgb(170, 161, 161);
 }
 
 h1 {
@@ -20,6 +20,18 @@ ul {
 
 ul>li:hover {
   background-color: #F5F5F5;
+}
+.checkmark {
+  display: inline;
+}
+li > div > div {
+  display: inline;
+}
+li > div > button {
+  display: inline;
+}
+span.checkmark:before {
+  content: '✓';
 }
 
 .form-inline .form-control {

@@ -54,24 +54,13 @@ export default class TodolistComponent extends React.Component {
         this.setState({ todoItems: _todoItems });
     }
 
-    // handleChange(e: any) {
-    //     this.setState({ [e.target.name]: e.target.value });
-    // }
-
-    createOnClickDone(itemId: any) {
-        var that = this;
-        return function () {
-            var id = parseInt(_todoItems[itemId]);
-            that.markTodoDone(id);
-        }
-    }
 
     render() {
 
         const todoList = _todoItems.map(todo => (
             <li key={todo.id}>
                 <div>
-                    <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.createOnClickDone.bind(this, todo.id)}></span>
+                    <span className="checkmark" onClick={() => this.onClickDone(todo.id)}></span>
                     <div className={todo.done ? "done" : "undone"}>{todo.title}</div>
                     <button type="button" className="close" onClick={() => this.onClickClose(todo.id)}>&times;</button>
                 </div>
@@ -94,13 +83,3 @@ export default class TodolistComponent extends React.Component {
     }
 }
 
-
-
-
-// return (
-//     <ul>
-//         {this.state.todoItems.map(function (todo) {
-//             return <li>{todo.title}</li>;
-//         })}
-//     </ul>
-// )
