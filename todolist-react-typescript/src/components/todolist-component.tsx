@@ -13,14 +13,7 @@ export default class TodolistComponent extends React.Component {
 
     constructor(props: any) {
         super(props);
-        // this.onClickClose = this.onClickClose.bind(this);
-        // this.onClickDone = this.onClickDone.bind(this);
-        // this.onSubmit = this.onSubmit.bind(this);
-        // this.addItem = this.addItem.bind(this);
-        // this.removeItem = this.removeItem.bind(this);
-        // this.markTodoDone = this.markTodoDone.bind(this);
         this.state = { todoItems: _todoItems };
-        // this.onSubmit = this.onSubmit.bind(this);
         this.inputValue = '';
     }
     componentDidMount() {
@@ -52,7 +45,7 @@ export default class TodolistComponent extends React.Component {
 
     onSubmit = (e: any) => {
         e.preventDefault();
-        let title = this.inputValue;
+        let title = this.context.value;
         _todoItems.unshift({
             id: _todoItems.length + 1,
             title: title,
@@ -60,6 +53,10 @@ export default class TodolistComponent extends React.Component {
         });
         this.setState({ todoItems: _todoItems });
     }
+
+    // handleChange(e: any) {
+    //     this.setState({ [e.target.name]: e.target.value });
+    // }
 
     createOnClickDone(itemId: any) {
         var that = this;
@@ -85,8 +82,8 @@ export default class TodolistComponent extends React.Component {
             <div>
                 <h1>Todo list</h1>;
                 <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-                    <input type="text" ref={(val) => this.inputValue = val} name="inputValue" className="form-control" placeholder="add a new todo..." />
-                    <button type="submit" className="btn btn-default">Add</button>
+                    <input type="text" ref={(input) => this.context = input} name="inputValue" className="form-control" placeholder="add a new todo..." />
+                    <button type="submit" onClick={e => this.onSubmit(e)} className="btn btn-default">Add</button>
                 </form>
                 <br />
                 <ul className="list-group">
