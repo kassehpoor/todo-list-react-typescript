@@ -9,7 +9,7 @@ _todoItems.push({ id: 3, title: "go to RPA project", done: true });
 
 export default class TodolistComponent extends React.Component {
 
-    inputValue: string;
+    inputValue: any;
 
     constructor(props: any) {
         super(props);
@@ -21,31 +21,19 @@ export default class TodolistComponent extends React.Component {
     }
 
     onClickClose(itemId: any) {
-        var id = parseInt(_todoItems[itemId]);
-        this.removeItem(id);
-    }
-
-    onClickDone(itemId: any) {
-        var id = parseInt(_todoItems[itemId]);
-        this.markTodoDone(id);
-    }
-
-    markTodoDone(itemId: any) {
-        var todo = _todoItems[itemId];
         _todoItems.splice(itemId, 1);
-        todo.done = !todo.done;
-        todo.done ? _todoItems.push(todo) : _todoItems.unshift(todo);
         this.setState({ todoItems: _todoItems });
     }
 
-    removeItem(itemId: any) {
-        _todoItems.splice(itemId, 1);
+    onClickDone(itemId: any) {
+        var todo = _todoItems.find(t => t.id === itemId);
+        todo.done = !todo.done;
         this.setState({ todoItems: _todoItems });
     }
 
     onSubmit = (e: any) => {
         e.preventDefault();
-        let title = this.context.value;
+        let title = this.inputValue.value;
         _todoItems.unshift({
             id: _todoItems.length + 1,
             title: title,
@@ -71,7 +59,7 @@ export default class TodolistComponent extends React.Component {
             <div>
                 <h1>Todo list</h1>;
                 <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-                    <input type="text" ref={(input) => this.context = input} name="inputValue" className="form-control" placeholder="add a new todo..." />
+                    <input type="text" ref={(input) => this.inputValue = input} name="inputValue" className="form-control" placeholder="add a new todo..." />
                     <button type="submit" onClick={e => this.onSubmit(e)} className="btn btn-default">Add</button>
                 </form>
                 <br />
