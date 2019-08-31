@@ -21,7 +21,8 @@ export default class TodolistComponent extends React.Component {
     }
 
     onClickClose(itemId: any) {
-        _todoItems.splice(itemId, 1);
+        var index = _todoItems.findIndex(t => t.id === itemId);
+        _todoItems.splice(index, 1);
         this.setState({ todoItems: _todoItems });
     }
 
