@@ -41,6 +41,7 @@ export default class TodolistComponent extends React.Component {
             done: false
         });
         this.setState({ todoItems: _todoItems });
+        this.inputValue.value = '';
     }
 
     render() {
@@ -67,7 +68,7 @@ export default class TodolistComponent extends React.Component {
                     {todoList}
                 </ul>
             </div>
-        );
+        )
     }
 }
 

@@ -16,6 +16,12 @@ const App: React.FC = () => {
   return (
     <div>
       {/* <HeaderComponent /> */}
+      {/* <header>
+        <Link to="/"></Link>
+        <Link to="/todolist"></Link>
+        <Link to="/signin"></Link>
+        <Link to="/singout"></Link>
+      </header> */}
       {/* <Router>
         <div>
           <Route exact path="/" component={TodoPageComponent} />
@@ -28,24 +34,11 @@ const App: React.FC = () => {
   );
 }
 
-function Header() {
-  return (
-    <ul>
-      <li>
-        <Link to="/"></Link>
-      </li>
-      <li>
-        <Link to="/todolist"></Link>
-      </li>
-      <li>
-        <Link to="/signin"></Link>
-      </li>
-      <li>
-        <Link to="/singout"></Link>
-      </li>
-    </ul>
-  );
-}
+// function Header() {
+//   return (
+
+//   );
+// }
 
 export default App;
 
