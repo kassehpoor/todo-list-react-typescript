@@ -41,7 +41,7 @@ export default class TodolistComponent extends React.Component {
             done: false
         });
         this.setState({ todoItems: _todoItems });
-        this.inputValue.value = '';
+        // this.inputValue.value = '';
     }
 
     render() {
@@ -60,7 +60,7 @@ export default class TodolistComponent extends React.Component {
             <div>
                 <h1>Todo list</h1>;
                 <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-                    <input type="text" ref={(input) => this.inputValue = input} name="inputValue" className="form-control" placeholder="add a new todo..." />
+                    <input autoComplete="off" type="text" ref={(input) => this.inputValue = input} name="inputValue" className="form-control" placeholder="add a new todo..." />
                     <button type="submit" onClick={e => this.onSubmit(e)} className="btn btn-default">Add</button>
                 </form>
                 <br />
