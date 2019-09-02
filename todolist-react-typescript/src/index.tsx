@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import TodolistComponent from './components/todolist-component';
+import TodolistComponent from './client/components/todolist-component';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(< TodolistComponent />, document.getElementById('root'));

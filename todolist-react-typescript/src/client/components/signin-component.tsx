@@ -1,4 +1,5 @@
 import * as React from 'react';
+import connection from '../connection';
 
 type Props = {};
 type State = {};
@@ -15,27 +16,32 @@ export default class SignInComponent extends React.Component {
         this.inputPassword = '';
     }
 
-    onLogin() {
 
-        // <Authenticate username={this.inputUserName.value} password={this.inputPassword.value} />
-        // goto('todolistComponent');
-        this.setState({});
+    onLogin(username: any, password: any) {
+        connection.authenticate(username, password).then(function (result: any) {
+            if (!result) {
+                return alert('authentication failed.');
+            }
+            var user = JSON.parse(result);
+            // App.reInit(user);
+            // Router.goto('todolist');
+        }, function (err: any) {
+            alert(err);
+        });
     }
 
     onCancel() {
-
         // goto('todolistComponent');
-        this.setState({});
     }
 
     render() {
         return (
             <div>
-                <form ref="form" onSubmit={this.onLogin} className="form-inline">
+                <form ref="form" className="form-inline">
                     <input autoComplete="off" type="text" ref={(n) => this.inputUserName = n} className="form-control" placeholder="user name..." />
                     <input autoComplete="off" type="text" ref={(p) => this.inputPassword = p} className="form-control" placeholder="password..." />
                     <br />
-                    <button type="submit" onClick={this.onLogin} className="btn btn-default">login</button>
+                    <button type="button" onClick={() => this.onLogin(this.inputUserName, this.inputPassword)} className="btn btn-default">login</button>
                     <button onClick={this.onCancel} className="btn btn-default">cancel</button>
                 </form>
             </div>
