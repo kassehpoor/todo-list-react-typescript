@@ -20,13 +20,13 @@ export default class TodolistComponent extends React.Component {
         // this.refs.itemName.focus();
     }
 
-    onClickClose(itemId: any) {
+    deleteTodo(itemId: any) {
         var index = _todoItems.findIndex(t => t.id === itemId);
         _todoItems.splice(index, 1);
         this.setState({ todoItems: _todoItems });
     }
 
-    onClickDone(itemId: any) {
+    doneTodo(itemId: any) {
         var todo = _todoItems.find(t => t.id === itemId);
         todo.done = !todo.done;
         this.setState({ todoItems: _todoItems });
@@ -49,9 +49,9 @@ export default class TodolistComponent extends React.Component {
         const todoList = _todoItems.map(todo => (
             <li key={todo.id}>
                 <div>
-                    <span className="checkmark" onClick={() => this.onClickDone(todo.id)}></span>
+                    <span className="checkmark" onClick={() => this.doneTodo(todo.id)}></span>
                     <div className={todo.done ? "done" : "undone"}>{todo.title}</div>
-                    <button type="button" className="close" onClick={() => this.onClickClose(todo.id)}>&times;</button>
+                    <button type="button" className="close" onClick={() => this.deleteTodo(todo.id)}>&times;</button>
                 </div>
             </li>
         ));
