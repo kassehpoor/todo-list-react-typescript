@@ -1,5 +1,7 @@
 import * as React from 'react';
 import connection from '../connection';
+import database from '../database';
+
 
 import App from '../../App';
 
@@ -24,9 +26,8 @@ export default class SignInComponent extends React.Component {
                 return alert('authentication failed.');
             }
             var user = JSON.parse(result);
-            // changelocalstorage(user/);
+            database.setCurrentUser(user);
             // goto('todolistComponent');
-
         }, function (err: any) {
             alert(err);
         });

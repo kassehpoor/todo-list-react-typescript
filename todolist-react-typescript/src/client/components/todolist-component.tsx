@@ -1,5 +1,6 @@
 import * as React from 'react';
 import '../../index.css';
+import database from '../database';
 
 //itself get current usermodel form local storage
 var _todoItems: any[] = [];
@@ -42,6 +43,8 @@ export default class TodolistComponent extends React.Component {
         });
         this.setState({ todoItems: _todoItems });
         // this.inputValue.value = '';
+        var user = database.getCurrentUser();
+        database.setModel(user.id, _todoItems);
     }
 
     render() {

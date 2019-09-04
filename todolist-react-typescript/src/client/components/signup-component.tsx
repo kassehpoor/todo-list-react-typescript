@@ -1,5 +1,7 @@
 import * as React from 'react';
 import connection from '../connection';
+import database from '../database';
+
 
 type Props = {};
 type State = {};
@@ -27,8 +29,9 @@ export default class SignUpComponent extends React.Component {
             }
             var user = JSON.parse(result);
             alert('register done successfuly for  ' + user.firstName + ' ' + user.lastName);
-            // App.reInit(user);
+            database.setCurrentUser(user);
             // Router.goto('todolist');
+
         }, function (err: any) {
             alert(err);
         });
