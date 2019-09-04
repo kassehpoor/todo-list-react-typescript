@@ -2,8 +2,7 @@ import * as React from 'react';
 import connection from '../connection';
 import database from '../database';
 
-
-import App from '../../App';
+import sm from '../state-manager';
 
 type Props = {};
 type State = {};
@@ -18,6 +17,7 @@ export default class SignInComponent extends React.Component {
         this.state = {};
         this.inputUserName = '';
         this.inputPassword = '';
+
     }
 
     onLogin(username: any, password: any) {
@@ -28,6 +28,8 @@ export default class SignInComponent extends React.Component {
             var user = JSON.parse(result);
             database.setCurrentUser(user);
             // goto('todolistComponent');
+            //change headercomponent userdisplay name
+            sm.pub('user-changed', user.firstName + ' ' + user.lastName);
         }, function (err: any) {
             alert(err);
         });

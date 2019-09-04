@@ -2,7 +2,6 @@ import * as React from 'react';
 import '../../index.css';
 import database from '../database';
 
-//itself get current usermodel form local storage
 // var _todoItems: any[] = [];
 // _todoItems.push({ id: 1, title: "learn react", done: false });
 // _todoItems.push({ id: 2, title: "learn typescript", done: true });

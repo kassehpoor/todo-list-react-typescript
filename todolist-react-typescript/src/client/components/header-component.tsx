@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import sm from '../state-manager';
+
 type Props = {};
 type State = { userDisplayName: string };
 
@@ -9,6 +11,17 @@ export default class HeaderComponent extends React.Component<Props, State>{
     readonly state: State = {
         userDisplayName: ''
     };
+
+    constructor(props: Props) {
+        super(props);
+        let that = this;
+
+        sm.sub('user-changed', function (name: any) {
+            that.setState({ userDisplayName: name });
+        });
+    }
+
+
 
     render() {
         return (
