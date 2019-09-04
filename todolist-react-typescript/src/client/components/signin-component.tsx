@@ -24,9 +24,9 @@ export default class SignInComponent extends React.Component {
                 return alert('authentication failed.');
             }
             var user = JSON.parse(result);
-            // App.reInit(user);
+            // changelocalstorage(user/model);
             // goto('todolistComponent');
-            <App />
+
         }, function (err: any) {
             alert(err);
         });

@@ -6,17 +6,16 @@ import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom"
 import TodolistComponent from './client/components/todolist-component';
 import SignInComponent from './client/components/signin-component';
 import SignUpComponent from './client/components/signup-component';
+import HeaderComponent from './client/components/header-component';
 
 // import logo from './logo.svg';
 import './App.css';
 
+
 const App: React.FC = () => {
   return (
     <Router>
-      {/* <HeaderComponent /> */}
-      <NavLink className='btn-Sign' to="/todolist">TodoList</NavLink>
-      <NavLink className='btn-Sign' to="/signin">Signin</NavLink>
-      <NavLink className='btn-Sign' to="/signup">Singup</NavLink>
+      <HeaderComponent />
 
       <Route exact path="/todolist" component={TodolistComponent} />
       <Route path="/signin" component={SignInComponent} />
@@ -24,18 +23,6 @@ const App: React.FC = () => {
     </Router>
   );
 }
-
-// function HeaderComponent() {
-//   return (
-//     <div>
-//       {/* <span className="spnUserDisplayName"></span> */}
-//       <NavLink className='btn-Sign' to="/todolist">TodoList</NavLink>
-//       <NavLink className='btn-Sign' to="/signin">Signin</NavLink>
-//       <NavLink className='btn-Sign' to="/signup">Singup</NavLink>
-//     </div>
-
-//   )
-// }
 
 export default App;
 
