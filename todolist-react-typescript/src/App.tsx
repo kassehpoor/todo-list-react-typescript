@@ -1,13 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import './index.css';
 
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
-// import TodoPageComponent from './components/todoPage-component';
-// import HeaderComponent from './components/header-component';
 import TodolistComponent from './client/components/todolist-component';
 import SignInComponent from './client/components/signin-component';
 import SignUpComponent from './client/components/signup-component';
-
 
 // import logo from './logo.svg';
 import './App.css';
@@ -15,9 +13,10 @@ import './App.css';
 const App: React.FC = () => {
   return (
     <Router>
-      <Link to="/todolist">TodoList</Link>
-      <Link to="/signin">Signin</Link>
-      <Link to="/singup">Singup</Link>
+      {/* <HeaderComponent /> */}
+      <NavLink className='btn-Sign' to="/todolist">TodoList</NavLink>
+      <NavLink className='btn-Sign' to="/signin">Signin</NavLink>
+      <NavLink className='btn-Sign' to="/signup">Singup</NavLink>
 
       <Route exact path="/todolist" component={TodolistComponent} />
       <Route path="/signin" component={SignInComponent} />
@@ -25,6 +24,18 @@ const App: React.FC = () => {
     </Router>
   );
 }
+
+// function HeaderComponent() {
+//   return (
+//     <div>
+//       {/* <span className="spnUserDisplayName"></span> */}
+//       <NavLink className='btn-Sign' to="/todolist">TodoList</NavLink>
+//       <NavLink className='btn-Sign' to="/signin">Signin</NavLink>
+//       <NavLink className='btn-Sign' to="/signup">Singup</NavLink>
+//     </div>
+
+//   )
+// }
 
 export default App;
 

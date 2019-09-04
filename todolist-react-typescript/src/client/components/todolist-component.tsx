@@ -59,6 +59,7 @@ export default class TodolistComponent extends React.Component {
         return (
             <div>
                 <h1>Todo list</h1>;
+                {/* <span className="spnUserDisplayName"></span> */}
                 <form ref="form" onSubmit={this.onSubmit} className="form-inline">
                     <input autoComplete="off" type="text" ref={(input) => this.inputValue = input} name="inputValue" className="form-control" placeholder="add a new todo..." />
                     <button type="submit" onClick={e => this.onSubmit(e)} className="btn btn-default">Add</button>

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import connection from '../connection';
 
+import App from '../../App';
+
 type Props = {};
 type State = {};
 
@@ -16,18 +18,18 @@ export default class SignInComponent extends React.Component {
         this.inputPassword = '';
     }
 
-
     onLogin(username: any, password: any) {
-        // connection.authenticate(username, password).then(function (result: any) {
-        //     if (!result) {
-        //         return alert('authentication failed.');
-        //     }
-        //     var user = JSON.parse(result);
-        //     // App.reInit(user);
-        //     // Router.goto('todolist');
-        // }, function (err: any) {
-        //     alert(err);
-        // });
+        connection.authenticate(username, password).then(function (result: any) {
+            if (!result) {
+                return alert('authentication failed.');
+            }
+            var user = JSON.parse(result);
+            // App.reInit(user);
+            // goto('todolistComponent');
+            <App />
+        }, function (err: any) {
+            alert(err);
+        });
     }
 
     onCancel() {
