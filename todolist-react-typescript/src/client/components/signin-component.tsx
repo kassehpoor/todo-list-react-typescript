@@ -21,18 +21,21 @@ export default class SignInComponent extends React.Component {
     }
 
     onLogin(username: any, password: any) {
-        connection.authenticate(username, password).then(function (result: any) {
-            if (!result) {
-                return alert('authentication failed.');
-            }
-            var user = JSON.parse(result);
-            database.setCurrentUser(user);
-            // goto('todolistComponent');
-            //change headercomponent userdisplay name
-            sm.pub('user-changed', user.firstName + ' ' + user.lastName);
-        }, function (err: any) {
-            alert(err);
-        });
+        // connection.authenticate(username, password).then(function (result: any) {
+        //     if (!result) {
+        //         return alert('authentication failed.');
+        //     }
+        //     var user = JSON.parse(result);
+        //     database.setCurrentUser(user);
+        //     // goto('todolistComponent');
+        //     //change headercomponent userdisplay name
+        //     sm.pub('user-changed', user.firstName + ' ' + user.lastName);
+        // }, function (err: any) {
+        //     alert(err);
+        // });
+
+        sm.pub('user-changed', 'dummy' + ' ' + 'user');
+
     }
 
     onCancel() {

@@ -17,7 +17,7 @@ export default class HeaderComponent extends React.Component<Props, State>{
         let that = this;
 
         sm.sub('user-changed', function (name: any) {
-            that.setState({ userDisplayName: name });
+            that.setState({ userDisplayName: name || 'anony' });
         });
     }
 

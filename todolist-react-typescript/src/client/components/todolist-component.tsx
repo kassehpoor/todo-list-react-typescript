@@ -7,7 +7,7 @@ import database from '../database';
 // _todoItems.push({ id: 2, title: "learn typescript", done: true });
 // _todoItems.push({ id: 3, title: "go to RPA project", done: true });
 
-var _user = database.getCurrentUser() || 'anonymouse';
+var _user = database.getCurrentUser() || 0;
 var _todoItems: any[] = database.getModel(_user.id) || [];
 
 export default class TodolistComponent extends React.Component {
