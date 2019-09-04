@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 // import TodoPageComponent from './components/todoPage-component';
-// import TodolistComponent from './components/todolist-component';
 // import HeaderComponent from './components/header-component';
-// import SignInComponent from './components/signin-component';
-// import SignOutComponent from './components/signout-component';
+import TodolistComponent from './client/components/todolist-component';
+import SignInComponent from './client/components/signin-component';
+import SignUpComponent from './client/components/signup-component';
 
 
 // import logo from './logo.svg';
@@ -14,31 +14,17 @@ import './App.css';
 
 const App: React.FC = () => {
   return (
-    <div>
-      {/* <HeaderComponent /> */}
-      {/* <header>
-        <Link to="/"></Link>
-        <Link to="/todolist"></Link>
-        <Link to="/signin"></Link>
-        <Link to="/singout"></Link>
-      </header> */}
-      {/* <Router>
-        <div>
-          <Route exact path="/" component={TodoPageComponent} />
-          <Route exact path="/todolist" component={TodolistComponent} />
-           <Route path="/signin" component={SignInComponent} />
-           <Route path="/signout" component={SignOutComponent} />
-        </div>
-      </Router> */}
-    </div>
+    <Router>
+      <Link to="/todolist">TodoList</Link>
+      <Link to="/signin">Signin</Link>
+      <Link to="/singup">Singup</Link>
+
+      <Route exact path="/todolist" component={TodolistComponent} />
+      <Route path="/signin" component={SignInComponent} />
+      <Route path="/signup" component={SignUpComponent} />
+    </Router>
   );
 }
-
-// function Header() {
-//   return (
-
-//   );
-// }
 
 export default App;
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../index.css';
+import '../../index.css';
 
 
 var _todoItems: any[] = [];

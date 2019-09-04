@@ -21,17 +21,17 @@ export default class SignUpComponent extends React.Component {
     }
 
     onRegister(firstname: any, lastname: any, username: any, password: any) {
-        connection.registerUser(firstname, lastname, username, password).then(function (result: any) {
-            if (!result) {
-                return alert('register failed.');
-            }
-            var user = JSON.parse(result);
-            alert('register done successfuly for  ' + user.firstName + ' ' + user.lastName);
-            // App.reInit(user);
-            // Router.goto('todolist');
-        }, function (err: any) {
-            alert(err);
-        });
+        // connection.registerUser(firstname, lastname, username, password).then(function (result: any) {
+        //     if (!result) {
+        //         return alert('register failed.');
+        //     }
+        //     var user = JSON.parse(result);
+        //     alert('register done successfuly for  ' + user.firstName + ' ' + user.lastName);
+        //     // App.reInit(user);
+        //     // Router.goto('todolist');
+        // }, function (err: any) {
+        //     alert(err);
+        // });
     }
 
     onCancel() {

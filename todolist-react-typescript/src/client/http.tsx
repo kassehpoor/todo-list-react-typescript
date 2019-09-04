@@ -1,6 +1,6 @@
 import { any } from "prop-types";
 
-var http = (function () {
+export default (function () {
 
 
     var _defaultHeaders: any[] = [];
@@ -35,7 +35,7 @@ var http = (function () {
 
     function xhr(method: any, url: any, data: any, headers: any) {
 
-        var xhr = new XMLHttpRequest();
+        var xhr: any = new XMLHttpRequest();
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
@@ -70,4 +70,3 @@ var http = (function () {
     }
 
 })();
-export default http;

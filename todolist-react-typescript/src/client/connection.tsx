@@ -36,6 +36,7 @@ var connection = (function () {
         return http.get('read', []);
     }
 
+
     function upload(data: any) {
         return http.post('write', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }]);
     }
