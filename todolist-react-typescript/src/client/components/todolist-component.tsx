@@ -3,10 +3,12 @@ import '../../index.css';
 import database from '../database';
 
 //itself get current usermodel form local storage
-var _todoItems: any[] = [];
-_todoItems.push({ id: 1, title: "learn react", done: false });
-_todoItems.push({ id: 2, title: "learn typescript", done: true });
-_todoItems.push({ id: 3, title: "go to RPA project", done: true });
+// var _todoItems: any[] = [];
+// _todoItems.push({ id: 1, title: "learn react", done: false });
+// _todoItems.push({ id: 2, title: "learn typescript", done: true });
+// _todoItems.push({ id: 3, title: "go to RPA project", done: true });
+var _user = database.getCurrentUser();
+var _todoItems = database.getModel(_user.id)
 
 export default class TodolistComponent extends React.Component {
 
@@ -43,8 +45,7 @@ export default class TodolistComponent extends React.Component {
         });
         this.setState({ todoItems: _todoItems });
         // this.inputValue.value = '';
-        var user = database.getCurrentUser();
-        database.setModel(user.id, _todoItems);
+        database.setModel(_user.id, _todoItems);
     }
 
     render() {
