@@ -5,17 +5,10 @@ import App from '../../App';
 
 import sm from '../state-manager';
 
-// type Props = {};
-
-// type State = { userDisplayName: string };
 
 export default class SignInComponent extends React.Component<any, {}> {
     inputUserName: any;
     inputPassword: any;
-
-    // readonly state: State = {
-    //     userDisplayName: ''
-    // };
 
     constructor(props: any) {
         super(props);

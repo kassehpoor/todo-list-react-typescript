@@ -8,7 +8,6 @@ import SignInComponent from './client/components/signin-component';
 import SignUpComponent from './client/components/signup-component';
 import HeaderComponent from './client/components/header-component';
 
-// import logo from './logo.svg';
 import './App.css';
 
 
