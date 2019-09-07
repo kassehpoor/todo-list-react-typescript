@@ -13,12 +13,23 @@ import './App.css';
 
 
 const App: React.FC = () => {
+
+  var _stateUpdater: any;
+
+  function registerUpdater(fn: any) {
+    _stateUpdater = fn;
+  }
+
+  function updateState(name: any) {
+    _stateUpdater(name);
+  }
+
   return (
     <Router>
-      <HeaderComponent />
+      <HeaderComponent registerStateUpdater={registerUpdater} />
 
       <Route exact path="/todolist" component={TodolistComponent} />
-      <Route path="/signin" component={SignInComponent} />
+      <Route path="/signin" render={(props) => (<SignInComponent updateUserDisplayName={updateState} />)} />
       <Route path="/signup" component={SignUpComponent} />
     </Router>
   );

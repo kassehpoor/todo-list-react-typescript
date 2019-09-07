@@ -7,21 +7,23 @@ type Props = {};
 type State = { userDisplayName: string };
 
 
-export default class HeaderComponent extends React.Component<Props, State>{
+export default class HeaderComponent extends React.Component<any, State>{
     readonly state: State = {
         userDisplayName: ''
     };
 
-    constructor(props: Props) {
+    constructor(props: any) {
         super(props);
         let that = this;
-
-        sm.sub('user-changed', function (name: any) {
-            that.setState({ userDisplayName: name || 'anony' });
+        // sm.sub('user-changed', function (name: any) {
+        //     that.setState({ userDisplayName: name });
+        // });
+        props.registerStateUpdater(function (name: any) {
+            that.setState({ userDisplayName: name });
         });
+
+
     }
-
-
 
     render() {
         return (

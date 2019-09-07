@@ -1,26 +1,31 @@
 import * as React from 'react';
 import connection from '../connection';
 import database from '../database';
+import App from '../../App';
 
 import sm from '../state-manager';
 
-type Props = {};
-type State = {};
+// type Props = {};
+
+type State = { userDisplayName: string };
 
 
-export default class SignInComponent extends React.Component {
+export default class SignInComponent extends React.Component<any, State> {
     inputUserName: any;
     inputPassword: any;
 
+    readonly state: State = {
+        userDisplayName: ''
+    };
+
     constructor(props: any) {
         super(props);
-        this.state = {};
         this.inputUserName = '';
         this.inputPassword = '';
-
     }
 
-    onLogin(username: any, password: any) {
+
+    onLogin() {
         // connection.authenticate(username, password).then(function (result: any) {
         //     if (!result) {
         //         return alert('authentication failed.');
@@ -34,8 +39,9 @@ export default class SignInComponent extends React.Component {
         //     alert(err);
         // });
 
-        sm.pub('user-changed', 'dummy' + ' ' + 'user');
-
+        // sm.pub('user-changed', 'dummy' + ' ' + 'user');
+        const name = this.inputUserName.value;
+        this.props.updateUserDisplayName(name);
     }
 
     onCancel() {
@@ -49,7 +55,8 @@ export default class SignInComponent extends React.Component {
                     <input autoComplete="off" type="text" ref={(n) => this.inputUserName = n} className="form-control" placeholder="user name..." />
                     <input autoComplete="off" type="text" ref={(p) => this.inputPassword = p} className="form-control" placeholder="password..." />
                     <br />
-                    <button type="button" onClick={() => this.onLogin(this.inputUserName, this.inputPassword)} className="btn btn-default">login</button>
+                    {/* <App value={this.state.userDisplayName} /> */}
+                    <button type="button" onClick={this.onLogin.bind(this)} className="btn btn-default">login</button>
                     <button onClick={this.onCancel} className="btn btn-default">cancel</button>
                 </form>
             </div>
@@ -57,3 +64,6 @@ export default class SignInComponent extends React.Component {
 
     };
 }
+
+
+// this.updateUserDisplayName.bind(this, this.inputUserName + '' + this.inputPassword)

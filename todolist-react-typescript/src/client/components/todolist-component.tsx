@@ -19,9 +19,6 @@ export default class TodolistComponent extends React.Component {
         this.state = { todoItems: _todoItems };
         this.inputValue = '';
     }
-    componentDidMount() {
-        // this.refs.itemName.focus();
-    }
 
     deleteTodo(itemId: any) {
         var index = _todoItems.findIndex(t => t.id === itemId);
