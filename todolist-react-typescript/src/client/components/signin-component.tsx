@@ -7,16 +7,15 @@ import sm from '../state-manager';
 
 // type Props = {};
 
-type State = { userDisplayName: string };
+// type State = { userDisplayName: string };
 
-
-export default class SignInComponent extends React.Component<any, State> {
+export default class SignInComponent extends React.Component<any, {}> {
     inputUserName: any;
     inputPassword: any;
 
-    readonly state: State = {
-        userDisplayName: ''
-    };
+    // readonly state: State = {
+    //     userDisplayName: ''
+    // };
 
     constructor(props: any) {
         super(props);
@@ -42,6 +41,8 @@ export default class SignInComponent extends React.Component<any, State> {
         // sm.pub('user-changed', 'dummy' + ' ' + 'user');
         const name = this.inputUserName.value;
         this.props.updateUserDisplayName(name);
+
+        // goto('todolistComponent');
     }
 
     onCancel() {
@@ -55,7 +56,6 @@ export default class SignInComponent extends React.Component<any, State> {
                     <input autoComplete="off" type="text" ref={(n) => this.inputUserName = n} className="form-control" placeholder="user name..." />
                     <input autoComplete="off" type="text" ref={(p) => this.inputPassword = p} className="form-control" placeholder="password..." />
                     <br />
-                    {/* <App value={this.state.userDisplayName} /> */}
                     <button type="button" onClick={this.onLogin.bind(this)} className="btn btn-default">login</button>
                     <button onClick={this.onCancel} className="btn btn-default">cancel</button>
                 </form>
@@ -66,4 +66,3 @@ export default class SignInComponent extends React.Component<any, State> {
 }
 
 
-// this.updateUserDisplayName.bind(this, this.inputUserName + '' + this.inputPassword)
