@@ -7,47 +7,52 @@ import database from '../database';
 // _todoItems.push({ id: 2, title: "learn typescript", done: true });
 // _todoItems.push({ id: 3, title: "go to RPA project", done: true });
 
-var _user = database.getCurrentUser() || 0;
-var _todoItems: any[] = database.getModel(_user.id) || [];
 
-export default class TodolistComponent extends React.Component {
+
+export default class TodolistComponent extends React.Component<any, {}> {
+
+    _user: any = {};
+    _todoItems: any[] = [];
 
     inputValue: any;
 
     constructor(props: any) {
         super(props);
-        this.state = { todoItems: _todoItems };
+        this._user = database.getCurrentUser() || 0;
+        this._todoItems = database.getModel(this._user.id) || [];
+
+        this.state = { userId: this._user.id, todoItems: this._todoItems };
         this.inputValue = '';
     }
 
     deleteTodo(itemId: any) {
-        var index = _todoItems.findIndex(t => t.id === itemId);
-        _todoItems.splice(index, 1);
-        this.setState({ todoItems: _todoItems });
+        var index = this._todoItems.findIndex(t => t.id === itemId);
+        this._todoItems.splice(index, 1);
+        this.setState({ todoItems: this._todoItems });
     }
 
     doneTodo(itemId: any) {
-        var todo = _todoItems.find(t => t.id === itemId);
+        var todo = this._todoItems.find(t => t.id === itemId);
         todo.done = !todo.done;
-        this.setState({ todoItems: _todoItems });
+        this.setState({ todoItems: this._todoItems });
     }
 
     onSubmit = (e: any) => {
         e.preventDefault();
         let title = this.inputValue.value;
-        _todoItems.unshift({
-            id: _todoItems.length + 1,
+        this._todoItems.unshift({
+            id: this._todoItems.length + 1,
             title: title,
             done: false
         });
-        this.setState({ todoItems: _todoItems });
+        database.setModel(this._user.id, this._todoItems);
+        this.setState({ userId: this._user.id, todoItems: this._todoItems });
         // this.inputValue.value = '';
-        database.setModel(_user.id, _todoItems);
     }
 
     render() {
 
-        const todoList = _todoItems.map(todo => (
+        const todoList = this._todoItems.map(todo => (
             <li key={todo.id}>
                 <div>
                     <span className="checkmark" onClick={() => this.doneTodo(todo.id)}></span>

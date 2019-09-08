@@ -21,6 +21,7 @@ const App: React.FC = () => {
     _stateUpdater(name);
   }
 
+
   return (
     <Router>
       <HeaderComponent registerStateUpdater={registerUpdater} />
