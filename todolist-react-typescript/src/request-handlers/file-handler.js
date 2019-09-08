@@ -5,7 +5,7 @@ module.exports = function fileHandler(req, res) {
         if (err) {
             res.writeHead(500);
             console.error(err + 'problem.............');
-            res.end('error');
+            res.end('error: file-handler');
             return;
         }
         res.writeHead(200);

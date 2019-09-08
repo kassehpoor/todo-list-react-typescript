@@ -20,7 +20,7 @@ var connection = (function () {
             "firstName": firstname,
             "lastName": lastname
         }
-        return http.post('register', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }])
+        return http.post('/api/register', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }])
     }
 
     function authenticate(username: any, password: any) {
@@ -29,16 +29,16 @@ var connection = (function () {
             { name: 'username', value: username },
             { name: 'password', value: password }
         ];
-        return http.post('auth', null, headers);
+        return http.post('/api/auth', null, headers);
     }
 
     function download() {
-        return http.get('read', []);
+        return http.get('/api/read', []);
     }
 
 
     function upload(data: any) {
-        return http.post('write', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }]);
+        return http.post('/api/write', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }]);
     }
 
     function signout() {

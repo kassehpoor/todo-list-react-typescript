@@ -6,14 +6,14 @@ exports.requestHnadler = function requestHnadler(req, res) {
 	var routeHandler = ({
 		'GET': {
 			'/': handlers.indexHandler,
-			'/read': handlers.readHandler
+			'/api/read': handlers.readHandler
 		},
 		'POST': {
-			'/write': handlers.writeHandler,
-			'/auth': handlers.authHandler,
-			'/register': handlers.registerHandler
+			'/api/write': handlers.writeHandler,
+			'/api/auth': handlers.authHandler,
+			'/api/register': handlers.registerHandler
 		},
 	})[req.method][req.url];
 
-	(routeHandler || handlers.fileHandler)(req, res);
+	(routeHandler || handlers.handler404)(req, res);
 };

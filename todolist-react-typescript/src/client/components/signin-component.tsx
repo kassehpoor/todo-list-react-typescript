@@ -16,7 +16,7 @@ export default class SignInComponent extends React.Component<any, {}> {
     }
 
     onLogin() {
-        connection.authenticate(this.inputUserName, this.inputPassword).then((result: any) => {
+        connection.authenticate(this.inputUserName.value, this.inputPassword.value).then((result: any) => {
 
             if (!result) {
                 return alert('authentication failed.');
@@ -28,18 +28,11 @@ export default class SignInComponent extends React.Component<any, {}> {
             this.props.updateUserDisplayName(name);
             // goto('todolistComponent');
 
-            sm.pub('user-changed', user.firstName + ' ' + user.lastName);
+            // sm.pub('user-changed', user.firstName + ' ' + user.lastName);
         }, function (err: any) {
             alert(err);
         });
 
-        // const name = this.inputUserName.value;
-        // sm.pub('user-changed', 'dummy' + ' ' + 'user');
-
-        // const name = this.inputUserName.value;
-        // this.props.updateUserDisplayName(name);
-
-        // goto('todolistComponent');
     }
 
     onCancel() {

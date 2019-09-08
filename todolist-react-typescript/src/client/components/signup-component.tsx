@@ -30,7 +30,7 @@ export default class SignUpComponent extends React.Component {
             var user = JSON.parse(result);
             alert('register done successfuly for  ' + user.firstName + ' ' + user.lastName);
             database.setCurrentUser(user);
-            // Router.goto('todolist');
+            // goto('todolistComponent');
 
         }, function (err: any) {
             alert(err);
@@ -51,7 +51,7 @@ export default class SignUpComponent extends React.Component {
                     <input autoComplete="off" type="text" ref={(n) => this.inputUserName = n} className="form-control" placeholder="user name..." />
                     <input autoComplete="off" type="text" ref={(p) => this.inputPassword = p} className="form-control" placeholder="password..." />
                     <br />
-                    <button type="button" onClick={() => this.onRegister(this.inputFirstName, this.inputLastName, this.inputUserName, this.inputPassword)} className="btn btn-default">submit</button>
+                    <button type="button" onClick={() => this.onRegister(this.inputFirstName.value, this.inputLastName.value, this.inputUserName.value, this.inputPassword.value)} className="btn btn-default">submit</button>
                     <button onClick={this.onCancel} className="btn btn-default">cancel</button>
                 </form>
             </div>
