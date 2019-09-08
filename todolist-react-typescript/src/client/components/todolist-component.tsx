@@ -13,6 +13,7 @@ export default class TodolistComponent extends React.Component<any, {}> {
 
     _user: any = {};
     _todoItems: any[] = [];
+    _filter: number = 0
 
     inputValue: any;
 
@@ -21,7 +22,7 @@ export default class TodolistComponent extends React.Component<any, {}> {
         this._user = database.getCurrentUser() || 0;
         this._todoItems = database.getModel(this._user.id) || [];
 
-        this.state = { userId: this._user.id, todoItems: this._todoItems };
+        this.state = { userId: this._user.id, todoItems: this._todoItems, filter: this._filter };
         this.inputValue = '';
     }
 
@@ -50,6 +51,10 @@ export default class TodolistComponent extends React.Component<any, {}> {
         // this.inputValue.value = '';
     }
 
+    filter(f: any) {
+        this.setState({ filter: f })
+    }
+
     render() {
 
         const todoList = this._todoItems.map(todo => (
@@ -72,6 +77,12 @@ export default class TodolistComponent extends React.Component<any, {}> {
                 <br />
                 <ul className="list-group">
                     {todoList}
+                </ul>
+                <br />
+                <ul>
+                    <input className="filters" type="button" onClick={this.filter.bind(this, 0)} value="All" />
+                    <input className="filters" type="button" onClick={this.filter.bind(this, 1)} value="Active" />
+                    <input className="filters" type="button" onClick={this.filter.bind(this, 2)} value="Complete" />
                 </ul>
             </div>
         )
