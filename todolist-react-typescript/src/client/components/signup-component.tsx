@@ -2,10 +2,8 @@ import * as React from 'react';
 import connection from '../connection';
 import database from '../database';
 
-
 type Props = {};
 type State = {};
-
 
 export default class SignUpComponent extends React.Component {
     inputFirstName: any;
