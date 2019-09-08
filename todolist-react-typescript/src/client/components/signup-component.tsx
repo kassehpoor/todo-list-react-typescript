@@ -5,17 +5,12 @@ import { Redirect } from 'react-router';
 
 type Props = {};
 
-type State = { goTo_TodolistComp: boolean };
-
-export default class SignUpComponent extends React.Component<any, State> {
+export default class SignUpComponent extends React.Component<any, {}> {
     inputFirstName: any;
     inputLastName: any;
     inputUserName: any;
     inputPassword: any;
 
-    readonly state: State = {
-        goTo_TodolistComp: false
-    };
 
     constructor(props: any) {
         super(props);
@@ -24,7 +19,6 @@ export default class SignUpComponent extends React.Component<any, State> {
         this.inputPassword = '';
         this.inputPassword = '';
     }
-
     onRegister(firstname: any, lastname: any, username: any, password: any) {
         var that = this;
         connection.registerUser(firstname, lastname, username, password).then(function (result: any) {
@@ -34,11 +28,8 @@ export default class SignUpComponent extends React.Component<any, State> {
             var user = JSON.parse(result);
             alert('register done successfuly for  ' + user.firstName + ' ' + user.lastName);
             database.setCurrentUser(user);
-            const name = user.firstName + ' ' + user.lastName;
-            that.props.updateUserDisplayName(name);
 
             // goto('todolistComponent');
-            that.setState({ goTo_TodolistComp: true });
 
         }, function (err: any) {
             alert(err);
@@ -46,14 +37,11 @@ export default class SignUpComponent extends React.Component<any, State> {
     }
 
     onCancel() {
-        var that = this;
-        that.setState({ goTo_TodolistComp: true });
+        // goto('todolistComponent');
+
     }
 
     render() {
-        if (this.state.goTo_TodolistComp === true) {
-            return <Redirect to='/todolist' />
-        }
 
         return (
             <div>

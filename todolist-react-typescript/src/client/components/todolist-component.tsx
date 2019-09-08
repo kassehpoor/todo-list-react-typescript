@@ -7,57 +7,51 @@ import database from '../database';
 // _todoItems.push({ id: 2, title: "learn typescript", done: true });
 // _todoItems.push({ id: 3, title: "go to RPA project", done: true });
 
-
+_user: any = {};
+_todoItems: any[] = [];
+_filter: number = 0
 
 export default class TodolistComponent extends React.Component<any, {}> {
-
-    _user: any = {};
-    _todoItems: any[] = [];
-    _filter: number = 0
 
     inputValue: any;
 
     constructor(props: any) {
         super(props);
-        this._user = database.getCurrentUser() || 0;
-        this._todoItems = database.getModel(this._user.id) || [];
+        _user = database.getCurrentUser() || 0;
+        _todoItems = database.getModel(_user.id) || [];
 
-        this.state = { userId: this._user.id, todoItems: this._todoItems, filter: this._filter };
+        this.state = { userId: _user.id, todoItems: _todoItems, };
         this.inputValue = '';
     }
 
     deleteTodo(itemId: any) {
-        var index = this._todoItems.findIndex(t => t.id === itemId);
-        this._todoItems.splice(index, 1);
-        this.setState({ todoItems: this._todoItems });
+        var index = _todoItems.findIndex(t => t.id === itemId);
+        _todoItems.splice(index, 1);
+        this.setState({ todoItems: _todoItems });
     }
 
     doneTodo(itemId: any) {
-        var todo = this._todoItems.find(t => t.id === itemId);
+        var todo = _todoItems.find(t => t.id === itemId);
         todo.done = !todo.done;
-        this.setState({ todoItems: this._todoItems });
+        this.setState({ todoItems: _todoItems });
     }
 
     onSubmit = (e: any) => {
         e.preventDefault();
         let title = this.inputValue.value;
-        this._todoItems.unshift({
-            id: this._todoItems.length + 1,
+        _todoItems.unshift({
+            id: _todoItems.length + 1,
             title: title,
             done: false
         });
-        database.setModel(this._user.id, this._todoItems);
-        this.setState({ userId: this._user.id, todoItems: this._todoItems });
+        database.setModel(_user.id, _todoItems);
+        this.setState({ userId: _user.id, todoItems: _todoItems });
         // this.inputValue.value = '';
-    }
-
-    filter(f: any) {
-        this.setState({ filter: f })
     }
 
     render() {
 
-        const todoList = this._todoItems.map(todo => (
+        const todoList = _todoItems.map(todo => (
             <li key={todo.id}>
                 <div>
                     <span className="checkmark" onClick={() => this.doneTodo(todo.id)}></span>
@@ -78,12 +72,7 @@ export default class TodolistComponent extends React.Component<any, {}> {
                 <ul className="list-group">
                     {todoList}
                 </ul>
-                <br />
-                <ul>
-                    <input className="filters" type="button" onClick={this.filter.bind(this, 0)} value="All" />
-                    <input className="filters" type="button" onClick={this.filter.bind(this, 1)} value="Active" />
-                    <input className="filters" type="button" onClick={this.filter.bind(this, 2)} value="Complete" />
-                </ul>
+
             </div>
         )
     }

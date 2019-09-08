@@ -9,15 +9,9 @@ import sm from '../state-manager';
 import { withRouter, Redirect } from 'react-router-dom'
 
 
-type State = { goTo_TodolistComp: boolean };
-
-export default class SignInComponent extends React.Component<any, State> {
+export default class SignInComponent extends React.Component<any, {}> {
     inputUserName: any;
     inputPassword: any;
-
-    readonly state: State = {
-        goTo_TodolistComp: false
-    };
 
     constructor(props: any) {
         super(props);
@@ -41,8 +35,6 @@ export default class SignInComponent extends React.Component<any, State> {
             // sm.pub('user-changed', user.firstName + ' ' + user.lastName);
 
             // goto('todolistComponent');
-            // that.props.history.push('/todolist');
-            that.setState({ goTo_TodolistComp: true });
 
         }, function (err: any) {
             alert(err);
@@ -52,13 +44,9 @@ export default class SignInComponent extends React.Component<any, State> {
 
     onCancel() {
         var that = this;
-        that.setState({ goTo_TodolistComp: true });
     }
 
     render() {
-        if (this.state.goTo_TodolistComp === true) {
-            return <Redirect to='/todolist' />
-        }
 
         // const Button = withRouter(({ history }) => (<button type='button' onClick={() => { history.push('/todolist') }}>login! </button>))
 

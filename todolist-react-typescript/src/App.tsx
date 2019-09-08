@@ -28,7 +28,7 @@ const App: React.FC = () => {
 
       <Route exact path="/todolist" component={TodolistComponent} />
       <Route path="/signin" render={(props) => (<SignInComponent updateUserDisplayName={updateState} />)} />
-      <Route path="/signup" render={(props) => (<SignUpComponent updateUserDisplayName={updateState} />)} />
+      <Route path="/signup" component={SignUpComponent} />
     </Router>
   );
 }
