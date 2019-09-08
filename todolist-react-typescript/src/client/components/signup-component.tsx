@@ -1,9 +1,11 @@
 import * as React from 'react';
 import connection from '../connection';
 import database from '../database';
+import { Redirect } from 'react-router';
 
 type Props = {};
-type State = {};
+
+type State = { goTo_TodolistComp: boolean };
 
 export default class SignUpComponent extends React.Component {
     inputFirstName: any;
@@ -11,9 +13,12 @@ export default class SignUpComponent extends React.Component {
     inputUserName: any;
     inputPassword: any;
 
+    readonly state: State = {
+        goTo_TodolistComp: false
+    };
+
     constructor(props: any) {
         super(props);
-        this.state = {};
         this.inputFirstName = '';
         this.inputLastName = '';
         this.inputPassword = '';
@@ -21,6 +26,7 @@ export default class SignUpComponent extends React.Component {
     }
 
     onRegister(firstname: any, lastname: any, username: any, password: any) {
+        var that = this;
         connection.registerUser(firstname, lastname, username, password).then(function (result: any) {
             if (!result) {
                 return alert('register failed.');
@@ -28,7 +34,9 @@ export default class SignUpComponent extends React.Component {
             var user = JSON.parse(result);
             alert('register done successfuly for  ' + user.firstName + ' ' + user.lastName);
             database.setCurrentUser(user);
+
             // goto('todolistComponent');
+            that.setState({ goTo_TodolistComp: true });
 
         }, function (err: any) {
             alert(err);
@@ -36,11 +44,15 @@ export default class SignUpComponent extends React.Component {
     }
 
     onCancel() {
-
-        // goto('todolistComponent');
+        var that = this;
+        that.setState({ goTo_TodolistComp: true });
     }
 
     render() {
+        if (this.state.goTo_TodolistComp === true) {
+            return <Redirect to='/todolist' />
+        }
+
         return (
             <div>
                 <form ref="form" className="form-inline">
@@ -50,7 +62,7 @@ export default class SignUpComponent extends React.Component {
                     <input autoComplete="off" type="text" ref={(p) => this.inputPassword = p} className="form-control" placeholder="password..." />
                     <br />
                     <button type="button" onClick={() => this.onRegister(this.inputFirstName.value, this.inputLastName.value, this.inputUserName.value, this.inputPassword.value)} className="btn btn-default">submit</button>
-                    <button onClick={this.onCancel} className="btn btn-default">cancel</button>
+                    <button onClick={this.onCancel.bind(this)} className="btn btn-default">cancel</button>
                 </form>
             </div>
         )
