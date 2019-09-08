@@ -11,7 +11,7 @@ npm install @types/react-router-dom
 5)npm start
 
 -------------------------------------------
-how to use proxy:
+how to use CRA proxy:
 1)in package.json file put:
 "proxy": "http://localhost:5000",
 
