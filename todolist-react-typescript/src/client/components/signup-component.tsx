@@ -7,7 +7,7 @@ type Props = {};
 
 type State = { goTo_TodolistComp: boolean };
 
-export default class SignUpComponent extends React.Component {
+export default class SignUpComponent extends React.Component<any, State> {
     inputFirstName: any;
     inputLastName: any;
     inputUserName: any;
@@ -34,6 +34,8 @@ export default class SignUpComponent extends React.Component {
             var user = JSON.parse(result);
             alert('register done successfuly for  ' + user.firstName + ' ' + user.lastName);
             database.setCurrentUser(user);
+            const name = user.firstName + ' ' + user.lastName;
+            that.props.updateUserDisplayName(name);
 
             // goto('todolistComponent');
             that.setState({ goTo_TodolistComp: true });
