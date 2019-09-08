@@ -5,7 +5,6 @@ import App from '../../App';
 
 import sm from '../state-manager';
 
-
 export default class SignInComponent extends React.Component<any, {}> {
     inputUserName: any;
     inputPassword: any;
@@ -16,24 +15,29 @@ export default class SignInComponent extends React.Component<any, {}> {
         this.inputPassword = '';
     }
 
-
     onLogin() {
-        // connection.authenticate(username, password).then(function (result: any) {
-        //     if (!result) {
-        //         return alert('authentication failed.');
-        //     }
-        //     var user = JSON.parse(result);
-        //     database.setCurrentUser(user);
-        //     // goto('todolistComponent');
-        //     //change headercomponent userdisplay name
-        //     sm.pub('user-changed', user.firstName + ' ' + user.lastName);
-        // }, function (err: any) {
-        //     alert(err);
-        // });
+        connection.authenticate(this.inputUserName, this.inputPassword).then((result: any) => {
 
+            if (!result) {
+                return alert('authentication failed.');
+            }
+            var user = JSON.parse(result);
+            database.setCurrentUser(user);
+
+            const name = user.firstName + ' ' + user.lastName;
+            this.props.updateUserDisplayName(name);
+            // goto('todolistComponent');
+
+            sm.pub('user-changed', user.firstName + ' ' + user.lastName);
+        }, function (err: any) {
+            alert(err);
+        });
+
+        // const name = this.inputUserName.value;
         // sm.pub('user-changed', 'dummy' + ' ' + 'user');
-        const name = this.inputUserName.value;
-        this.props.updateUserDisplayName(name);
+
+        // const name = this.inputUserName.value;
+        // this.props.updateUserDisplayName(name);
 
         // goto('todolistComponent');
     }
@@ -49,7 +53,7 @@ export default class SignInComponent extends React.Component<any, {}> {
                     <input autoComplete="off" type="text" ref={(n) => this.inputUserName = n} className="form-control" placeholder="user name..." />
                     <input autoComplete="off" type="text" ref={(p) => this.inputPassword = p} className="form-control" placeholder="password..." />
                     <br />
-                    <button type="button" onClick={this.onLogin.bind(this)} className="btn btn-default">login</button>
+                    <button type="button" onClick={() => this.onLogin()} className="btn btn-default">login</button>
                     <button onClick={this.onCancel} className="btn btn-default">cancel</button>
                 </form>
             </div>

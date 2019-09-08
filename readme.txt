@@ -9,3 +9,14 @@ create-react-app <name-of-app> --typescript
 npm install @types/react-router-dom
 
 5)npm start
+
+-------------------------------------------
+how to use proxy:
+1)in package.json file put:
+"proxy": "http://localhost:5000",
+
+2)in src folder create file setupProxy.js with this content:
+const proxy = require('http-proxy-middleware');
+module.exports = function (app) {
+    app.use(proxy('/*', { target: 'http://localhost:5000' }))
+ }

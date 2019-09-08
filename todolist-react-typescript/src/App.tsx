@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import './App.css';
 
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
@@ -7,9 +8,6 @@ import TodolistComponent from './client/components/todolist-component';
 import SignInComponent from './client/components/signin-component';
 import SignUpComponent from './client/components/signup-component';
 import HeaderComponent from './client/components/header-component';
-
-import './App.css';
-
 
 const App: React.FC = () => {
 
