@@ -4,7 +4,7 @@ import database from '../database';
 
 // var _todoItems: any[] = [];
 // _todoItems.push({ id: 1, title: "learn react", done: false });
-// _todoItems.push({ id: 2, title: "learn typescript", done: true });
+// _todoItems.push({ id: 2, title: "learn typescript", done: true }); 
 // _todoItems.push({ id: 3, title: "go to RPA project", done: true });
 
 
@@ -13,7 +13,7 @@ export default class TodolistComponent extends React.Component<any, {}> {
 
     _user: any = {};
     _todoItems: any[] = [];
-    _filter: number = 0
+    _filter: any = 0;
 
     inputValue: any;
 
@@ -51,15 +51,15 @@ export default class TodolistComponent extends React.Component<any, {}> {
         // this.inputValue.value = '';
     }
 
-    filter(f: any) {
+    filter(f: Number) {
         this.setState({ filter: f })
     }
 
     render() {
 
         const todoList = this._todoItems.map(todo => (
-            <li key={todo.id}>
-                <div>
+            <li key={todo.id} className={todo.filter.complete ? "filter-active" : "filter-complete"}>
+                <div >
                     <span className="checkmark" onClick={() => this.doneTodo(todo.id)}></span>
                     <div className={todo.done ? "done" : "undone"}>{todo.title}</div>
                     <button type="button" className="close" onClick={() => this.deleteTodo(todo.id)}>&times;</button>
