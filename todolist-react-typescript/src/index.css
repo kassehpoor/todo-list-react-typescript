@@ -49,18 +49,6 @@ span.checkmark:before {
   color: gray;
 }
 
-.li{
-
-}
-
-.filter-active{
-  display: none;
-}
-
-.filter-complete{
-  display: none;
-}
-
 .icon {
   margin: 6px 10px 6px 0;
 }

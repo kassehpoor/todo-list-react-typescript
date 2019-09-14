@@ -66,7 +66,7 @@ export default class SignInComponent extends React.Component<any, State> {
             <div>
                 <form ref="form" className="form-inline">
                     <input autoComplete="off" type="text" ref={(n) => this.inputUserName = n} className="form-control" placeholder="user name..." />
-                    <input autoComplete="off" type="text" ref={(p) => this.inputPassword = p} className="form-control" placeholder="password..." />
+                    <input autoComplete="off" type="password" ref={(p) => this.inputPassword = p} className="form-control" placeholder="password..." />
                     <br />
                     <button type="button" onClick={this.onLogin.bind(this)} className="btn btn-default">login</button>
 
