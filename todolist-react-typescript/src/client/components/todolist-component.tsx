@@ -11,7 +11,8 @@ export default class TodolistComponent extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
 
-        const userId = database.getCurrentUser() || 0
+        const user = database.getCurrentUser() || 0
+        const userId = user.id;
         const todoItems = database.getModel(userId) || []
 
         this.state = {
@@ -26,15 +27,21 @@ export default class TodolistComponent extends React.Component<any, any> {
     }
 
     deleteTodo(itemId: any) {
-        const todoItems = this.state.todoItems
-        todoItems.splice(this.state.todoItems.findIndex((t: any) => t.id === itemId), 1)
+        //decompose
+        const { userId, todoItems } = this.state
+        todoItems.splice(todoItems.findIndex((t: any) => t.id === itemId), 1)
         this.setState({ todoItems })
+        database.setModel(userId, todoItems);
     }
 
     doneTodo(itemId: any) {
-        var todo = this.state.todoItems.find((t: any) => t.id === itemId);
-        todo.done = !todo.done;
-        this.setState({ todoItems: [...this.state.todoItems] });
+        const index = this.state.todoItems.findIndex((t: any) => t.id === itemId);
+        const todoItems = this.state.todoItems.slice(0, index - 1).concat({
+            ...this.state.todoItems[index],
+            done: !this.state.todoItems[index].done
+        }).concat(this.state.todoItems.slice(index + 1))
+        this.setState({ todoItems });
+        database.setModel(this.state.userId, this.state.todoItems);
     }
 
     onSubmit = (e: any) => {
@@ -48,6 +55,7 @@ export default class TodolistComponent extends React.Component<any, any> {
                 done: false
             }].concat(this.state.todoItems)
         })
+        database.setModel(this.state.userId, this.state.todoItems);
     }
 
     filter(f: Number) {
@@ -60,7 +68,6 @@ export default class TodolistComponent extends React.Component<any, any> {
         const todoList = todoItems.filter((todo: any) => filter === 0 || filter === 1 && !todo.done || filter === 2 && todo.done).map((todo: any) => (
             <li key={todo.id} >
                 <div >
-
                     <span className="checkmark" onClick={() => this.doneTodo(todo.id)}></span>
                     <div className={todo.done ? "done" : "undone"}>{todo.title}</div>
                     <button type="button" className="close" onClick={() => this.deleteTodo(todo.id)}>&times;</button>
