@@ -36,10 +36,6 @@ export default class HeaderComponent extends React.Component<any, State>{
         super(props);
         let that = this;
 
-        const user = database.getCurrentUser() || 0;
-        const name = user.firstName + '' + user.lastName;
-
-        this.setState({ userDisplayName: name });
         // sm.sub('user-changed', function (name: any) {
         //     that.setState({ userDisplayName: name });
         // });
@@ -48,11 +44,15 @@ export default class HeaderComponent extends React.Component<any, State>{
         //     that.setState({ userDisplayName: name });
         // });
     }
-
+    componentDidMount() {
+        const user = database.getCurrentUser() || 0;
+        const name = user.firstName + '' + user.lastName;
+        this.setState({ userDisplayName: name });
+    }
     render() {
         return (
             <div>
-                <div>{this.state.userDisplayName}</div>
+                {/* <div>{this.state.userDisplayName}</div> */}
                 <div>
                     <NavLink className='btn-Sign' to="/todolist">TodoList</NavLink>
                     <NavLink className='btn-Sign' to="/signin">Signin</NavLink>
