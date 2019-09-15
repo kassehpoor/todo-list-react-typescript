@@ -2,26 +2,35 @@ import * as React from 'react';
 import connection from '../connection';
 import database from '../database';
 import { withRouter, Redirect } from 'react-router-dom'
+import HeaderComponent from './header-component';
 // import sm from '../state-manager';
 
+
 type State = {
+    userDisplayName: string
     goTo_TodolistComp: boolean,
 };
+// const defaultName: string = 'anonymose user'
+
+export const userContext = React.createContext({
+    userDisplayName: '',
+    updateUserDisplayName: (newName: any) => { }
+});
 
 export default class SignInComponent extends React.Component<any, State> {
     inputUserName: any;
     inputPassword: any;
 
-
-    readonly state: State = {
-        goTo_TodolistComp: false,
-    }
-
-
     constructor(props: any) {
         super(props);
         this.inputUserName = '';
         this.inputPassword = '';
+
+        this.state = {
+            goTo_TodolistComp: false,
+            userDisplayName: 'anony',
+
+        }
     }
 
     onLogin() {
@@ -34,14 +43,9 @@ export default class SignInComponent extends React.Component<any, State> {
             var user = JSON.parse(result);
             database.setCurrentUser(user);
 
-            const name = user.firstName + ' ' + user.lastName;
-            //wrong: that.setState(that.state.userDisplayName: name);
+            const _userName = user.firstName + ' ' + user.lastName;
 
-            // that.props.updateUserDisplayName(name);
-            // sm.pub('user-changed', user.firstName + ' ' + user.lastName);
-
-            // that.props.history.push('/todolist');
-            that.setState({ goTo_TodolistComp: true });
+            that.setState({ userDisplayName: _userName, goTo_TodolistComp: true });
 
         }, function (err: any) {
             alert(err);
@@ -55,6 +59,8 @@ export default class SignInComponent extends React.Component<any, State> {
     }
 
     render() {
+        let userDN = this.context;
+
         if (this.state.goTo_TodolistComp === true) {
             return <Redirect to='/todolist' />
         }
@@ -68,10 +74,15 @@ export default class SignInComponent extends React.Component<any, State> {
                     <button type="button" onClick={this.onLogin.bind(this)} className="btn btn-default">login</button>
                     <button onClick={this.onCancel.bind(this)} className="btn btn-default">cancel</button>
                 </form>
+                <userContext.Provider value={this.state.userDisplayName}>
+
+                </userContext.Provider>
+
             </div>
         )
 
     };
 }
 
+SignInComponent.contextType = userContext;
 

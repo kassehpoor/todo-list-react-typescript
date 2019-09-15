@@ -1,11 +1,11 @@
 html, body {
   height: 100%;
-  color: brown;
+  color: blue;
   background: rgb(243, 241, 241);
 }
 
 .user-display-name{
-  text-emphasis-color: brown;
+  text-emphasis-color: green;
 }
 
 h1 {
