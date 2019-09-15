@@ -4,28 +4,19 @@ import database from '../database';
 import sm from '../state-manager';
 import { userContext } from '../components/signin-component';
 
-// type Props = {};
-type State = {
-    // userDisplayName: string
-};
 
-export default class HeaderComponent extends React.Component<any, State> {
+
+export default class HeaderComponent extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
         let that = this;
-        // this.updateUserDisplayName('');
     }
-
-    // updateUserDisplayName = (newUserDisplayName: string) => {
-    //     this.setState({ userDisplayName: newUserDisplayName });
-    // };
 
     render() {
         return (
             <div>
                 <userContext.Consumer>{({ userDisplayName }) => (<span>{userDisplayName}</span>)}</userContext.Consumer>
-                {/* <div>{this.state.userDisplayName}</div> */}
                 <div>
                     <NavLink className='btn-Sign' to="/todolist">TodoList</NavLink>
                     <NavLink className='btn-Sign' to="/signin">Signin</NavLink>
