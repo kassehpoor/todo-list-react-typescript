@@ -80,7 +80,7 @@ export default class TodolistComponent extends React.Component<any, any> {
             <div>
                 <h1>Todo list</h1>;
                 <HeaderConsumer>
-                    {({ userDisplayName }) => <span>{userDisplayName}</span>}
+                    {({ userDisplayName }) => <span className="user-display-name">{'ttt' + '' + userDisplayName}</span>}
                 </HeaderConsumer>
                 <form ref="form" onSubmit={this.onSubmit} className="form-inline">
                     <input autoComplete="off" type="text" ref={(input) => this.inputValue = input} name="inputValue" className="form-control" placeholder="add a new todo..." />
