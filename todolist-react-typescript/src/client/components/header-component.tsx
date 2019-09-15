@@ -1,16 +1,36 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import database from '../database';
 import sm from '../state-manager';
 
 type Props = {};
-type State = { userDisplayName: string };
+// type State = { userDisplayName: string };
+const HeaderContext = React.createContext({
+    userDisplayName: '',
+    updateUserDisplayName: () => { },
+});
 
+type State = {
+    goTo_TodolistComp: boolean,
+    userDisplayName: any,
+    updateUserDisplayName: () => {}
+};
 
 export default class HeaderComponent extends React.Component<any, State>{
-    readonly state: State = {
-        userDisplayName: ''
+
+    updateUserDisplayName = (newUserDisplayName: any) => {
+        this.setState({ userDisplayName: newUserDisplayName });
     };
+
+    State = {
+        goTo_TodolistComp: false,
+        userDisplayName: 'user',
+        updateUserDisplayName: this.updateUserDisplayName,
+    };
+
+    // readonly state: State = {
+    //     userDisplayName: ''
+    // };
 
     constructor(props: any) {
         super(props);
@@ -27,18 +47,21 @@ export default class HeaderComponent extends React.Component<any, State>{
     render() {
         return (
             <div>
-                <div>{this.state.userDisplayName}</div>
+                {/* <div>{this.state.userDisplayName}</div> */}
                 <div>
                     <NavLink className='btn-Sign' to="/todolist">TodoList</NavLink>
                     <NavLink className='btn-Sign' to="/signin">Signin</NavLink>
                     <NavLink className='btn-Sign' to="/signup">Singup</NavLink>
                 </div>
+                <HeaderContext.Provider value={this.state}>
+                    {this.props.children}
+                </HeaderContext.Provider>
             </div>
         );
     };
 }
 
-
+export const HeaderConsumer = HeaderContext.Consumer;
 
 
 
