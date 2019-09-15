@@ -13,7 +13,7 @@ type State = {
 // const defaultName: string = 'anonymose user'
 
 export const userContext = React.createContext({
-    userDisplayName: 'anony',
+    userDisplayName: 'anonymous user',
 });
 
 export default class SignInComponent extends React.Component<any, State> {
