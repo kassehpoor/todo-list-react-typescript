@@ -24,7 +24,7 @@ export default class HeaderComponent extends React.Component<any, State>{
 
     State = {
         goTo_TodolistComp: false,
-        userDisplayName: 'user',
+        userDisplayName: '',
         updateUserDisplayName: this.updateUserDisplayName,
     };
 
@@ -35,6 +35,11 @@ export default class HeaderComponent extends React.Component<any, State>{
     constructor(props: any) {
         super(props);
         let that = this;
+
+        const user = database.getCurrentUser() || 0;
+        const name = user.firstName + '' + user.lastName;
+
+        this.setState({ userDisplayName: name });
         // sm.sub('user-changed', function (name: any) {
         //     that.setState({ userDisplayName: name });
         // });

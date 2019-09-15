@@ -6,21 +6,21 @@ import { HeaderConsumer } from './header-component';
 export default class TodolistComponent extends React.Component<any, any> {
 
     counter: any;
-
     inputValue: any;
 
     constructor(props: any) {
         super(props);
 
-        const user = database.getCurrentUser() || 0
+        const user = database.getCurrentUser() || 0;
         const userId = user.id;
-        const todoItems = database.getModel(userId) || []
+        const todoItems = database.getModel(userId) || [];
 
         this.state = {
             userId,
             todoItems,
             filter: 0
         };
+
         //Hesam helped me
         this.counter = todoItems.reduce((a: any, todo: any) => Math.max(a, todo.id), 0) + 1
 
