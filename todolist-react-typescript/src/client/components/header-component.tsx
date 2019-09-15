@@ -44,11 +44,7 @@ export default class HeaderComponent extends React.Component<any, State>{
         //     that.setState({ userDisplayName: name });
         // });
     }
-    componentDidMount() {
-        const user = database.getCurrentUser() || 0;
-        const name = user.firstName + '' + user.lastName;
-        this.setState({ userDisplayName: name });
-    }
+
     render() {
         return (
             <div>

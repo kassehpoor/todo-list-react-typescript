@@ -13,10 +13,12 @@ export default class TodolistComponent extends React.Component<any, any> {
 
         const user = database.getCurrentUser() || 0;
         const userId = user.id;
+        const name = user.firstName + '' + user.lastName;
         const todoItems = database.getModel(userId) || [];
 
         this.state = {
             userId,
+            name,
             todoItems,
             filter: 0
         };
@@ -28,7 +30,6 @@ export default class TodolistComponent extends React.Component<any, any> {
     }
 
     deleteTodo(itemId: any) {
-        //decompose
         const { userId, todoItems } = this.state
         todoItems.splice(todoItems.findIndex((t: any) => t.id === itemId), 1)
         this.setState({ todoItems })
@@ -36,12 +37,11 @@ export default class TodolistComponent extends React.Component<any, any> {
     }
     //Hesam 
     doneTodo(itemId: any) {
-        const index = this.state.todoItems.findIndex((t: any) => t.id === itemId);
-        const todoItems = this.state.todoItems.slice(0, index - 1).concat({
-            ...this.state.todoItems[index],
-            done: !this.state.todoItems[index].done
-        }).concat(this.state.todoItems.slice(index + 1))
-        this.setState({ todoItems });
+        const { todoItems } = this.state;
+        var todo = todoItems.find((t: any) => t.id === itemId);
+        todo.done = !todo.done;
+        this.setState({ todoItems: todoItems });
+
         database.setModel(this.state.userId, this.state.todoItems);
     }
 
@@ -64,7 +64,7 @@ export default class TodolistComponent extends React.Component<any, any> {
     }
 
     render() {
-        const { todoItems, filter } = this.state;
+        const { name, todoItems, filter } = this.state;
 
         const todoList = todoItems.filter((todo: any) => filter === 0 || filter === 1 && !todo.done || filter === 2 && todo.done).map((todo: any) => (
             <li key={todo.id} >
@@ -80,7 +80,7 @@ export default class TodolistComponent extends React.Component<any, any> {
             <div>
                 <h1>Todo list</h1>;
                 <HeaderConsumer>
-                    {({ userDisplayName }) => <span className="user-display-name">{'current user is:' + '' + userDisplayName}</span>}
+                    {({ updateUserDisplayName }) => <span className="user-display-name">{'current user is:' + '' + updateUserDisplayName()}</span>}
                 </HeaderConsumer>
                 <form ref="form" onSubmit={this.onSubmit} className="form-inline">
                     <input autoComplete="off" type="text" ref={(input) => this.inputValue = input} name="inputValue" className="form-control" placeholder="add a new todo..." />
@@ -215,4 +215,10 @@ export default class TodolistComponent extends React.Component<any, {}> {
         )
     }
 }
+*/
+
+
+/*
+
+
 */
