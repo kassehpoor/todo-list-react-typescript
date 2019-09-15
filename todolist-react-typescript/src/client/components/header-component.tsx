@@ -22,8 +22,6 @@ export default class HeaderComponent extends React.Component<any, State>{
         // props.registerStateUpdater(function (name: any) {
         //     that.setState({ userDisplayName: name });
         // });
-
-
     }
 
     render() {
@@ -39,6 +37,22 @@ export default class HeaderComponent extends React.Component<any, State>{
         );
     };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

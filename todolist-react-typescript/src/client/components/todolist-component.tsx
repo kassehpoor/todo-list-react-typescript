@@ -1,6 +1,7 @@
 import * as React from 'react';
 import '../../index.css';
 import database from '../database';
+import { HeaderConsumer } from './signin-component';
 
 export default class TodolistComponent extends React.Component<any, any> {
 
@@ -78,7 +79,10 @@ export default class TodolistComponent extends React.Component<any, any> {
         return (
             <div>
                 <h1>Todo list</h1>;
-                 <form ref="form" onSubmit={this.onSubmit} className="form-inline">
+                <HeaderConsumer>
+                    {({ userDisplayName }) => <span>{userDisplayName}</span>}
+                </HeaderConsumer>
+                <form ref="form" onSubmit={this.onSubmit} className="form-inline">
                     <input autoComplete="off" type="text" ref={(input) => this.inputValue = input} name="inputValue" className="form-control" placeholder="add a new todo..." />
                     <button type="submit" onClick={e => this.onSubmit(e)} className="btn btn-default">Add</button>
                 </form>

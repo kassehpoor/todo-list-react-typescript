@@ -21,6 +21,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
+        <SignInComponent></SignInComponent>
         <HeaderComponent />
 
         <Route exact path="/todolist" component={TodolistComponent} />

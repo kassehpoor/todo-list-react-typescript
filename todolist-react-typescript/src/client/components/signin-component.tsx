@@ -3,10 +3,9 @@ import connection from '../connection';
 import database from '../database';
 import App from '../../App';
 // import todolistComponent from '../../client/components/todolist-component';
-
+import { withRouter, Redirect } from 'react-router-dom'
 import sm from '../state-manager';
 
-import { withRouter, Redirect } from 'react-router-dom'
 
 const HeaderContext = React.createContext({
     userDisplayName: '',
@@ -55,7 +54,8 @@ export default class SignInComponent extends React.Component<any, State> {
             database.setCurrentUser(user);
 
             const name = user.firstName + ' ' + user.lastName;
-            that.props.updateUserDisplayName(name);
+            that.setState(that.state.userDisplayName: name);
+            // that.props.updateUserDisplayName(name);
             // sm.pub('user-changed', user.firstName + ' ' + user.lastName);
 
             // goto('todolistComponent');
@@ -77,9 +77,7 @@ export default class SignInComponent extends React.Component<any, State> {
         if (this.state.goTo_TodolistComp === true) {
             return <Redirect to='/todolist' />
         }
-
         // const Button = withRouter(({ history }) => (<button type='button' onClick={() => { history.push('/todolist') }}>login! </button>))
-
         return (
             <div>
                 <form ref="form" className="form-inline">
