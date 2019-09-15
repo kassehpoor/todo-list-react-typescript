@@ -52,7 +52,7 @@ export default class HeaderComponent extends React.Component<any, State>{
     render() {
         return (
             <div>
-                {/* <div>{this.state.userDisplayName}</div> */}
+                <div>{this.state.userDisplayName}</div>
                 <div>
                     <NavLink className='btn-Sign' to="/todolist">TodoList</NavLink>
                     <NavLink className='btn-Sign' to="/signin">Signin</NavLink>
