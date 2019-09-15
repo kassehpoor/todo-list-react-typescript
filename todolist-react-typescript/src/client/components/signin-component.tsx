@@ -8,15 +8,33 @@ import sm from '../state-manager';
 
 import { withRouter, Redirect } from 'react-router-dom'
 
+const HeaderContext = React.createContext({
+    userDisplayName: '',
+    updateUserDisplayName: () => { },
+});
 
-type State = { goTo_TodolistComp: boolean };
+type State = {
+    goTo_TodolistComp: boolean,
+    userDisplayName: any,
+    updateUserDisplayName: () => {}
+};
 
 export default class SignInComponent extends React.Component<any, State> {
     inputUserName: any;
     inputPassword: any;
 
-    readonly state: State = {
-        goTo_TodolistComp: false
+    updateUserDisplayName = (newUserDisplayName: any) => {
+        this.setState({ userDisplayName: newUserDisplayName });
+    };
+
+    // readonly state: State = {
+    //     goTo_TodolistComp: false,
+    // }
+
+    State = {
+        goTo_TodolistComp: false,
+        userDisplayName: 'user',
+        updateUserDisplayName: this.updateUserDisplayName,
     };
 
     constructor(props: any) {
@@ -72,8 +90,13 @@ export default class SignInComponent extends React.Component<any, State> {
 
                     <button onClick={this.onCancel.bind(this)} className="btn btn-default">cancel</button>
                 </form>
+                <HeaderContext.Provider value={this.state}>
+                    {this.props.children}
+                </HeaderContext.Provider>
             </div>
         )
 
     };
 }
+
+export const HeaderConsumer = HeaderContext.Consumer;

@@ -1,4 +1,51 @@
 import React from 'react';
+// import React,{createContext} from 'react';
+import './index.css';
+import './App.css';
+
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+
+import TodolistComponent from './client/components/todolist-component';
+import SignInComponent from './client/components/signin-component';
+import SignUpComponent from './client/components/signup-component';
+import HeaderComponent from './client/components/header-component';
+import { any } from 'prop-types';
+
+
+class App extends React.Component {
+
+  constructor(props: any) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <Router>
+        <HeaderComponent />
+
+        <Route exact path="/todolist" component={TodolistComponent} />
+        <Route path="/signin" render={(props) => (<SignInComponent />)} />
+        <Route path="/signup" render={(props) => (<SignUpComponent />)} />
+      </Router >
+    );
+  }
+
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+/*
+import React from 'react';
 import './index.css';
 import './App.css';
 
@@ -34,9 +81,7 @@ const App: React.FC = () => {
 
 export default App;
 
-
-
-
+*/
 
 
 

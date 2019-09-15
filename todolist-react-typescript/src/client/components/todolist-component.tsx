@@ -20,7 +20,7 @@ export default class TodolistComponent extends React.Component<any, any> {
             todoItems,
             filter: 0
         };
-
+        //Hesam helped me
         this.counter = todoItems.reduce((a: any, todo: any) => Math.max(a, todo.id), 0) + 1
 
         this.inputValue = '';
@@ -33,7 +33,7 @@ export default class TodolistComponent extends React.Component<any, any> {
         this.setState({ todoItems })
         database.setModel(userId, todoItems);
     }
-
+    //Hesam helped me
     doneTodo(itemId: any) {
         const index = this.state.todoItems.findIndex((t: any) => t.id === itemId);
         const todoItems = this.state.todoItems.slice(0, index - 1).concat({

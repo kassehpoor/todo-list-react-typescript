@@ -18,9 +18,10 @@ export default class HeaderComponent extends React.Component<any, State>{
         // sm.sub('user-changed', function (name: any) {
         //     that.setState({ userDisplayName: name });
         // });
-        props.registerStateUpdater(function (name: any) {
-            that.setState({ userDisplayName: name });
-        });
+
+        // props.registerStateUpdater(function (name: any) {
+        //     that.setState({ userDisplayName: name });
+        // });
 
 
     }
