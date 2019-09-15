@@ -16,7 +16,7 @@ export default class HeaderComponent extends React.Component<any, any> {
     render() {
         return (
             <div>
-                <userContext.Consumer>{({ userDisplayName }) => (<span>{userDisplayName}</span>)}</userContext.Consumer>
+                <userContext.Consumer>{({ userDisplayName }) => (<span>{'current user is : ' + userDisplayName}</span>)}</userContext.Consumer>
                 <div>
                     <NavLink className='btn-Sign' to="/todolist">TodoList</NavLink>
                     <NavLink className='btn-Sign' to="/signin">Signin</NavLink>

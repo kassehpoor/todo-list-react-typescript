@@ -14,7 +14,6 @@ type State = {
 
 export const userContext = React.createContext({
     userDisplayName: '',
-    updateUserDisplayName: (newName: any) => { }
 });
 
 export default class SignInComponent extends React.Component<any, State> {
@@ -27,9 +26,8 @@ export default class SignInComponent extends React.Component<any, State> {
         this.inputPassword = '';
 
         this.state = {
-            goTo_TodolistComp: false,
             userDisplayName: 'anony',
-
+            goTo_TodolistComp: false,
         }
     }
 
@@ -59,7 +57,6 @@ export default class SignInComponent extends React.Component<any, State> {
     }
 
     render() {
-        let userDN = this.context;
 
         if (this.state.goTo_TodolistComp === true) {
             return <Redirect to='/todolist' />
@@ -74,7 +71,7 @@ export default class SignInComponent extends React.Component<any, State> {
                     <button type="button" onClick={this.onLogin.bind(this)} className="btn btn-default">login</button>
                     <button onClick={this.onCancel.bind(this)} className="btn btn-default">cancel</button>
                 </form>
-                <userContext.Provider value={this.state.userDisplayName}>
+                <userContext.Provider value={this.state}>
 
                 </userContext.Provider>
 
