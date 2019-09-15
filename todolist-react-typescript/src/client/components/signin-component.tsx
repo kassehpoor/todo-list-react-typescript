@@ -1,8 +1,6 @@
 import * as React from 'react';
 import connection from '../connection';
 import database from '../database';
-
-// import todolistComponent from '../../client/components/todolist-component';
 import { withRouter, Redirect } from 'react-router-dom'
 // import sm from '../state-manager';
 
@@ -42,7 +40,6 @@ export default class SignInComponent extends React.Component<any, State> {
             // that.props.updateUserDisplayName(name);
             // sm.pub('user-changed', user.firstName + ' ' + user.lastName);
 
-            // goto('todolistComponent');
             // that.props.history.push('/todolist');
             that.setState({ goTo_TodolistComp: true });
 
