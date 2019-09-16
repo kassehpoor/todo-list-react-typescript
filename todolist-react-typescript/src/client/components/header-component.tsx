@@ -1,5 +1,7 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
+import { userContext } from "../components/signin-component";
+import { spawn } from "child_process";
 
 export default class HeaderComponent extends React.Component<any, any> {
   constructor(props: any) {
@@ -9,7 +11,9 @@ export default class HeaderComponent extends React.Component<any, any> {
   render() {
     return (
       <div>
-        <span>{"current user is : " + this.props.userDisplayName}</span>
+        <userContext.Consumer>
+          {({ userDisplayName }) => <span>{userDisplayName}</span>}
+        </userContext.Consumer>
         <div>
           <NavLink className="btn-Sign" to="/todolist">
             TodoList
