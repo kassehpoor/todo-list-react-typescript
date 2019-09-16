@@ -6,13 +6,9 @@ import HeaderComponent from "./header-component";
 // import sm from '../state-manager';
 
 type State = {
-  userDisplayName: string;
+  //   userDisplayName: string;
   goTo_TodolistComp: boolean;
 };
-
-export const userContext = React.createContext({
-  userDisplayName: "anonymous user"
-});
 
 export default class SignInComponent extends React.Component<any, State> {
   inputUserName: any;
@@ -24,7 +20,7 @@ export default class SignInComponent extends React.Component<any, State> {
     this.inputPassword = "";
 
     this.state = {
-      userDisplayName: "anony",
+      //   userDisplayName: "anony",
       goTo_TodolistComp: false
     };
   }
@@ -41,10 +37,12 @@ export default class SignInComponent extends React.Component<any, State> {
           var user = JSON.parse(result);
           database.setCurrentUser(user);
 
-          const _userName = user.firstName + " " + user.lastName;
+          that.props.updateUserDisplayName(
+            user.firstName + " " + user.lastName
+          );
 
           that.setState({
-            userDisplayName: _userName,
+            // userDisplayName: _userName,
             goTo_TodolistComp: true
           });
         },
@@ -96,13 +94,10 @@ export default class SignInComponent extends React.Component<any, State> {
             cancel
           </button>
         </form>
-        <userContext.Provider value={this.state}></userContext.Provider>
       </div>
     );
   }
 }
-
-SignInComponent.contextType = userContext;
 
 /*
 import * as React from "react";

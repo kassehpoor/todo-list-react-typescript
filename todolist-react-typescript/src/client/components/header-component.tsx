@@ -1,6 +1,6 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
-import { userContext } from "../components/signin-component";
+import { userContext } from "../../App";
 import { spawn } from "child_process";
 
 export default class HeaderComponent extends React.Component<any, any> {

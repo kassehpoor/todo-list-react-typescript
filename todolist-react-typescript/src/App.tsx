@@ -2,6 +2,7 @@ import React from "react";
 // import React,{createContext} from 'react';
 import "./index.css";
 import "./App.css";
+import database from "./client/database";
 
 import {
   BrowserRouter as Router,
@@ -16,14 +17,36 @@ import SignUpComponent from "./client/components/signup-component";
 import HeaderComponent from "./client/components/header-component";
 import { any } from "prop-types";
 
-class App extends React.Component {
+export const userContext = React.createContext({
+  userDisplayName: "anonymous user"
+});
+
+interface State {
+  userDisplayName: string;
+  updateUserDisplayName: () => void;
+}
+
+class App extends React.Component<any, State> {
   constructor(props: any) {
     super(props);
+
+    this.state = {
+      userDisplayName: "anonymouse user",
+      updateUserDisplayName: this.updateUserDisplayName
+    };
+  }
+
+  updateUserDisplayName() {
+    const user = database.getCurrentUser() || "anonymouse user";
+    this.setState({
+      userDisplayName: user.firstName + "" + user.lastName
+    });
   }
 
   render() {
     return (
       <Router>
+        <userContext.Provider value={this.state}></userContext.Provider>
         <HeaderComponent></HeaderComponent>
 
         <Route exact path="/todolist" component={TodolistComponent} />
@@ -33,7 +56,7 @@ class App extends React.Component {
     );
   }
 }
-
+SignInComponent.contextType = userContext;
 export default App;
 
 /*
