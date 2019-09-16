@@ -1,19 +1,22 @@
-import React from 'react';
+import React from "react";
 // import React,{createContext} from 'react';
-import './index.css';
-import './App.css';
+import "./index.css";
+import "./App.css";
 
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  NavLink
+} from "react-router-dom";
 
-import TodolistComponent from './client/components/todolist-component';
-import SignInComponent from './client/components/signin-component';
-import SignUpComponent from './client/components/signup-component';
-import HeaderComponent from './client/components/header-component';
-import { any } from 'prop-types';
-
+import TodolistComponent from "./client/components/todolist-component";
+import SignInComponent from "./client/components/signin-component";
+import SignUpComponent from "./client/components/signup-component";
+import HeaderComponent from "./client/components/header-component";
+import { any } from "prop-types";
 
 class App extends React.Component {
-
   constructor(props: any) {
     super(props);
   }
@@ -24,25 +27,75 @@ class App extends React.Component {
         <HeaderComponent></HeaderComponent>
 
         <Route exact path="/todolist" component={TodolistComponent} />
-        <Route path="/signin" render={(props) => (<SignInComponent />)} />
-        <Route path="/signup" render={(props) => (<SignUpComponent />)} />
-      </Router >
+        <Route path="/signin" render={props => <SignInComponent />} />
+        <Route path="/signup" render={props => <SignUpComponent />} />
+      </Router>
     );
   }
-
 }
 
 export default App;
 
+/*
+import React from "react";
+import "./index.css";
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  NavLink
+} from "react-router-dom";
 
+import TodolistComponent from "./client/components/todolist-component";
+import SignInComponent from "./client/components/signin-component";
+import SignUpComponent from "./client/components/signup-component";
+import HeaderComponent from "./client/components/header-component";
 
+class App extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      userDisplayName: "anonymouse user"
+    };
+  }
 
+  render() {
+    return (
+      <Router>
+        <HeaderComponent
+          userDisplayName={this.state.userDisplayName}
+        ></HeaderComponent>
 
+        <Route exact path="/todolist" component={TodolistComponent} />
+        <Route
+          path="/signin"
+          render={props => (
+            <SignInComponent
+              onUpdateUserDisplayName={(userDisplayName: string) =>
+                this.setState({ userDisplayName })
+              }
+            />
+          )}
+        />
+        <Route
+          path="/signup"
+          render={props => (
+            <SignUpComponent
+              onUpdateUserDisplayName={(userDisplayName: string) =>
+                this.setState({ userDisplayName })
+              }
+            />
+          )}
+        />
+      </Router>
+    );
+  }
+}
 
+export default App;
 
-
-
-
+*/
 
 /*
 import React from 'react';
@@ -82,21 +135,6 @@ const App: React.FC = () => {
 export default App;
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const App: React.FC = () => {
 //   return (
