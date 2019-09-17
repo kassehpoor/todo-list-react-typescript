@@ -6,8 +6,9 @@ import HeaderComponent from "./header-component";
 // import sm from '../state-manager';
 
 type State = {
-  //   userDisplayName: string;
   goTo_TodolistComp: boolean;
+  updateUserDisplayName: () => void;
+  userDisplayName: string;
 };
 
 export default class SignInComponent extends React.Component<any, State> {
@@ -20,33 +21,25 @@ export default class SignInComponent extends React.Component<any, State> {
     this.inputPassword = "";
 
     this.state = {
-      //   userDisplayName: "anony",
-      goTo_TodolistComp: false
+      goTo_TodolistComp: false,
+      updateUserDisplayName: this.props.updateUserDisplayName,
+      userDisplayName: ""
     };
   }
 
   onLogin() {
     var that = this;
-    connection
-      .authenticate(this.inputUserName.value, this.inputPassword.value)
-      .then(
-        function(result: any) {
-          if (!result) {
-            return alert("authentication failed.");
-          }
-          var user = JSON.parse(result);
-          database.setCurrentUser(user);
-
-          that.props.updateUserDisplayName(
-            user.firstName + " " + user.lastName
-          );
-
-          that.setState({
-            // userDisplayName: _userName,
-            goTo_TodolistComp: true
-          });
-        },
-        function(err: any) {
+    connection.authenticate(this.inputUserName.value, this.inputPassword.value).then(function (result: any) {
+        if (!result) {
+          return alert("authentication failed.");
+        }
+        var user = JSON.parse(result);
+        database.setCurrentUser(user);
+        //update userDisplayName
+        that.props.updateUserDisplayName(user.firstName+''+user.lastName);
+        that.setState({ goTo_TodolistComp: true });
+      },
+        function (err: any) {
           alert(err);
         }
       );

@@ -1,18 +1,21 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
 import { userContext } from "../../App";
-import { spawn } from "child_process";
 
 export default class HeaderComponent extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
+
+    // this.setState({
+    //   userDisplayName: "anony"
+    // });
   }
 
   render() {
     return (
       <div>
         <userContext.Consumer>
-          {({ userDisplayName }) => <span>{userDisplayName}</span>}
+          {(userDisplayName) => <span>{userDisplayName}</span>}
         </userContext.Consumer>
         <div>
           <NavLink className="btn-Sign" to="/todolist">

@@ -17,13 +17,10 @@ import SignUpComponent from "./client/components/signup-component";
 import HeaderComponent from "./client/components/header-component";
 import { any } from "prop-types";
 
-export const userContext = React.createContext({
-  userDisplayName: "anonymous user"
-});
+export const userContext = React.createContext("");
 
 interface State {
   userDisplayName: string;
-  updateUserDisplayName: () => void;
 }
 
 class App extends React.Component<any, State> {
@@ -31,26 +28,24 @@ class App extends React.Component<any, State> {
     super(props);
 
     this.state = {
-      userDisplayName: "anonymouse user",
-      updateUserDisplayName: this.updateUserDisplayName
+      userDisplayName: "anonymouse user"
     };
   }
 
-  updateUserDisplayName() {
-    const user = database.getCurrentUser() || "anonymouse user";
-    this.setState({
-      userDisplayName: user.firstName + "" + user.lastName
-    });
+  updateUserDisplayName(displayName: any) {
+    // const user = database.getCurrentUser() || "anonymouse user";
+    this.setState({ userDisplayName: displayName });
   }
 
   render() {
     return (
       <Router>
-        <userContext.Provider value={this.state}></userContext.Provider>
-        <HeaderComponent></HeaderComponent>
+        <userContext.Provider value={this.state.userDisplayName}>
+          <HeaderComponent userDisplayName={this.props.userDisplayName} />
+        </userContext.Provider>
 
         <Route exact path="/todolist" component={TodolistComponent} />
-        <Route path="/signin" render={props => <SignInComponent />} />
+        <Route path="/signin" render={props => (<SignInComponent updateUserDisplayName={this.updateUserDisplayName.bind(this)} />)} />
         <Route path="/signup" render={props => <SignUpComponent />} />
       </Router>
     );
