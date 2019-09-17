@@ -35,8 +35,11 @@ export default class SignInComponent extends React.Component<any, State> {
         }
         var user = JSON.parse(result);
         database.setCurrentUser(user);
+       
         //update userDisplayName
-        that.props.updateUserDisplayName(user.firstName+''+user.lastName);
+        that.props.updateUserDisplayName(user.firstName+' '+user.lastName);
+        
+        // goto('todolistComponent');
         that.setState({ goTo_TodolistComp: true });
       },
         function (err: any) {

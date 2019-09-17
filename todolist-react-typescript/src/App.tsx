@@ -33,7 +33,6 @@ class App extends React.Component<any, State> {
   }
 
   updateUserDisplayName(displayName: any) {
-    // const user = database.getCurrentUser() || "anonymouse user";
     this.setState({ userDisplayName: displayName });
   }
 
@@ -46,7 +45,7 @@ class App extends React.Component<any, State> {
 
         <Route exact path="/todolist" component={TodolistComponent} />
         <Route path="/signin" render={props => (<SignInComponent updateUserDisplayName={this.updateUserDisplayName.bind(this)} />)} />
-        <Route path="/signup" render={props => <SignUpComponent />} />
+        <Route path="/signup" render={props => <SignUpComponent updateUserDisplayName={this.updateUserDisplayName.bind(this)} />} />
       </Router>
     );
   }

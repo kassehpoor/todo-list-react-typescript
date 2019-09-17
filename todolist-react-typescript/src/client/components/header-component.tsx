@@ -5,10 +5,6 @@ import { userContext } from "../../App";
 export default class HeaderComponent extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-
-    // this.setState({
-    //   userDisplayName: "anony"
-    // });
   }
 
   render() {

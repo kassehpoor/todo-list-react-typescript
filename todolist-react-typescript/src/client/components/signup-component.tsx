@@ -4,24 +4,30 @@ import database from "../database";
 import { Redirect } from "react-router";
 
 type Props = {};
-type State = { goTo_TodolistComp: boolean };
-
+type State = {
+  goTo_TodolistComp: boolean;
+  updateUserDisplayName: () => void;
+  userDisplayName: string;
+};
 export default class SignUpComponent extends React.Component<any, State> {
   inputFirstName: any;
   inputLastName: any;
   inputUserName: any;
   inputPassword: any;
 
-  readonly state: State = {
-    goTo_TodolistComp: false
-  };
-
+  
   constructor(props: any) {
     super(props);
     this.inputFirstName = "";
     this.inputLastName = "";
     this.inputPassword = "";
     this.inputPassword = "";
+
+    this.state = {
+      goTo_TodolistComp: false,
+      updateUserDisplayName: this.props.updateUserDisplayName,
+      userDisplayName: ""
+    };
   }
 
   onRegister(firstname: any, lastname: any, username: any, password: any) {
@@ -39,9 +45,9 @@ export default class SignUpComponent extends React.Component<any, State> {
             user.lastName
         );
         database.setCurrentUser(user);
-        const name = user.firstName + " " + user.lastName;
-        // that.props.updateUserDisplayName(name);
-
+         //update userDisplayName  
+        that.props.updateUserDisplayName(user.firstName+' '+user.lastName);
+        
         // goto('todolistComponent');
         that.setState({ goTo_TodolistComp: true });
       },
