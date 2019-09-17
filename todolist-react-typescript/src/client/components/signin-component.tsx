@@ -3,7 +3,6 @@ import connection from "../connection";
 import database from "../database";
 import { withRouter, Redirect } from "react-router-dom";
 import HeaderComponent from "./header-component";
-// import sm from '../state-manager';
 
 type State = {
   goTo_TodolistComp: boolean;
@@ -38,7 +37,7 @@ export default class SignInComponent extends React.Component<any, State> {
        
         //update userDisplayName
         that.props.updateUserDisplayName(user.firstName+' '+user.lastName);
-        
+
         // goto('todolistComponent');
         that.setState({ goTo_TodolistComp: true });
       },
@@ -57,7 +56,6 @@ export default class SignInComponent extends React.Component<any, State> {
     if (this.state.goTo_TodolistComp === true) {
       return <Redirect to="/todolist" />;
     }
-    // const Button = withRouter(({ history }) => (<button type='button' onClick={() => { history.push('/todolist') }}>login! </button>))
     return (
       <div>
         <form ref="form" className="form-inline">
@@ -94,6 +92,43 @@ export default class SignInComponent extends React.Component<any, State> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 import * as React from "react";

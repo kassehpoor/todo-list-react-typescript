@@ -47,7 +47,7 @@ export default class SignUpComponent extends React.Component<any, State> {
         database.setCurrentUser(user);
          //update userDisplayName  
         that.props.updateUserDisplayName(user.firstName+' '+user.lastName);
-        
+
         // goto('todolistComponent');
         that.setState({ goTo_TodolistComp: true });
       },
@@ -124,6 +124,69 @@ export default class SignUpComponent extends React.Component<any, State> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 import * as React from "react";

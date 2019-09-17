@@ -1,9 +1,6 @@
 import React from "react";
-// import React,{createContext} from 'react';
 import "./index.css";
 import "./App.css";
-import database from "./client/database";
-
 import {
   BrowserRouter as Router,
   Route,
@@ -15,7 +12,6 @@ import TodolistComponent from "./client/components/todolist-component";
 import SignInComponent from "./client/components/signin-component";
 import SignUpComponent from "./client/components/signup-component";
 import HeaderComponent from "./client/components/header-component";
-import { any } from "prop-types";
 
 export const userContext = React.createContext("");
 
@@ -52,6 +48,47 @@ class App extends React.Component<any, State> {
 }
 SignInComponent.contextType = userContext;
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 import React from "react";
