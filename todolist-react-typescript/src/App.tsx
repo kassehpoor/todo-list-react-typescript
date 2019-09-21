@@ -17,26 +17,29 @@ export const userContext = React.createContext("");
 
 interface State {
   userDisplayName: string;
+  appStatus: string
 }
 
-class App extends React.Component<any, State> {
+class App extends React.Component<any,State> {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      userDisplayName: "anonymouse user"
+      userDisplayName: "anonymouse user",
+      appStatus: 'todolist'
     };
   }
 
-  updateUserDisplayName(displayName: any) {
-    this.setState({ userDisplayName: displayName });
+  updateUserDisplayName(displayName: any, status: string) {
+    this.setState({ userDisplayName: displayName, appStatus: status });
   }
 
   render() {
     return (
       <Router>
+
         <userContext.Provider value={this.state.userDisplayName}>
-          <HeaderComponent userDisplayName={this.props.userDisplayName} />
+           <HeaderComponent status={this.props.appStatus} userDisplayName={this.props.userDisplayName}/>
         </userContext.Provider>
 
         <Route exact path="/todolist" component={TodolistComponent} />
